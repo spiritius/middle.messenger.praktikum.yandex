@@ -1,0 +1,19 @@
+.error-page {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+
+  &__title {
+    font-size: var(--text-lg);
+    color: var(--dark);
+  }
+  &__descr {
+    color: var(--dark);
+  }
+  &__link {
+    display: block;
+    margin-top: 20px;
+  }
+}

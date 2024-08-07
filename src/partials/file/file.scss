@@ -1,0 +1,20 @@
+.file {
+  &__wrapper {
+    position: relative;
+  }
+  &__label {
+    font-size: var(--text);
+    color: var(--primary-60);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+  &__control {
+    display: none;
+  }
+}

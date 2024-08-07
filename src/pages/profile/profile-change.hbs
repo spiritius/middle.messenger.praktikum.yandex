@@ -1,0 +1,39 @@
+<div class="profile">
+  {{> ProfileBack }}
+
+  <div class="profile__content">
+    {{> ProfileAvatar }}
+    <div class="profile__content_name">Evan</div>
+    <form class="profile__content_form">
+      <div class="profile__content_form_row">
+        <span>E-mail</span>
+        {{> Input name="email" type="email" value="evan@domain.com" autocomplete="on" }}
+      </div>
+      <div class="profile__content_form_row">
+        <span>Login</span>
+        {{> Input name="login" type="text" value="Evan99" }}
+      </div>
+      <div class="profile__content_form_row">
+        <span>First name</span>
+        {{> Input name="first_name" type="text" value="Evan"  autocomplete="on"}}
+      </div>
+      <div class="profile__content_form_row">
+        <span>Last name</span>
+        {{> Input name="second_name" type="text" value="Jones" }}
+      </div>
+      <div class="profile__content_form_row">
+        <span>Display name</span>
+        {{> Input name="Evan" type="text" value="Evan" }}
+      </div>
+      <div class="profile__content_form_row">
+        <span>Phone</span>
+        {{> Input name="phone" type="tel" value="+7 (909) 967 30 30" autocomplete="on" }}
+      </div>
+    </form>
+    <div class="profile__content_controls">
+      <div class="profile__content_controls_row">
+        {{> Button type="button" style="primary" title="Save changes" id="profileBack"}}
+      </div>
+    </div>
+  </div>
+</div>

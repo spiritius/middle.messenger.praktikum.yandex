@@ -1,0 +1,14 @@
+<form class="form">
+  <h1 class="form__title">Sign Up</h1>
+  {{> Input label="E-mail" type="email" name="email" error="Enter valid e-mail" required="true" style="error"}}
+  {{> Input label="Login" type="text" name="login" error="Minimum 4 symbols" required="true" style="error"}}
+  {{> Input label="First name" type="text" name="first_name" required="false"}}
+  {{> Input label="Last name" type="text" name="second_name" required="false"}}
+  {{> Input label="Phone" type="tel" name="phone" required="false"}}
+  {{> Input label="Password" type="password" name="password" minlength="8" required="true" autocomplete="off"}}
+  {{> Input label="Repeat password" type="password" name="repeatpassword" minlength="8" required="true" autocomplete="off"}}
+  <div class="form__buttons">
+    {{> Button title="Create account" type="submit" style="primary"}}
+    {{> Button title="Log in" type="button" style="link"}}
+  </div>
+</form>
