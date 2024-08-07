@@ -1,4 +1,4 @@
-# Yandex.Practicum: Messanger
+# Yandex.Practikum: Messanger
 
 # О проекте (ru)
 
@@ -6,7 +6,7 @@
 
 Демо текущий версии проекта на netlify: [https://resplendent-rugelach-b118f5.netlify.app/](https://resplendent-rugelach-b118f5.netlify.app/)
 
-Проект использует Vite в качестве сборщика проекта и Handlebar в качестве шаблонизатора, стили собираются с помощью препроцессора SASS, скрипты — на TypeScript.
+Проект использует Vite в качестве сборщика проекта и Handlebars в качестве шаблонизатора, стили собираются с помощью препроцессора SASS, скрипты — на TypeScript.
 
 Язык проекта: английский
 
