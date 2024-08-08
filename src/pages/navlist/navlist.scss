@@ -1,8 +1,11 @@
 #nav {
   margin: auto;
-  padding: 0;
-  display: grid;
-  grid-gap: 10px;
+  
+  ul {
+    padding: 0;
+    display: grid;
+    grid-gap: 10px;
+  }
 
   li {
     cursor: pointer;
