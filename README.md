@@ -1,83 +1,85 @@
-### Ветка, в которой делаете задания спринта, должна называться sprint_i, где i - номер спринта. Не переименовывайте её.
+# Yandex.Practicum: Messanger
 
-### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main. 
-### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).
+# О проекте (ru)
 
-### Например, задания для проектной работы во втором спринте вы делаете в ветке sprint_2. Открываете из неё pull request в ветку main. Ссылку на этот pr добавляете в README.md в ветке main. После этого на платформе Практикума нажимаете «Проверить задание».
+Индивидуальный учебный проект по созданию веб-мессенджера.
 
-### Также не забудьте проверить, что репозиторий публичный.
----
+Демо текущий версии проекта на netlify: [https://resplendent-rugelach-b118f5.netlify.app/](https://resplendent-rugelach-b118f5.netlify.app/)
 
+Проект использует Vite в качестве сборщика проекта и Handlebars в качестве шаблонизатора, стили собираются с помощью препроцессора SASS, скрипты — на TypeScript.
 
-Даже законченный проект остаётся только заготовкой, пока им не начнут пользоваться. Но сначала пользователь должен понять, зачем ему пользоваться вашим кодом. В этом помогает файл README.
+Язык проекта: английский
 
-README — первое, что прочитает пользователь, когда попадёт в репозиторий на «Гитхабе». Хороший REAMDE отвечает на четыре вопроса:
+## Текущая версия
 
-- Готов ли проект к использованию?
-- В чём его польза?
-- Как установить?
-- Как применять?
+Функционал реализован в рамках Спринта 1.
 
-## Бейджи
+Сверстаны шаблоны страниц:
 
-Быстро понять статус проекта помогают бейджи на «Гитхабе». Иногда разработчики ограничиваются парой бейджев, которые сообщат о статусе тестов кода:
-
-![Бэйджи](https://github.com/yandex-praktikum/mf.messenger.praktikum.yandex.images/blob/master/mf/b.png)
-
-Если пользователь увидит ошибку в работе тестов, то поймёт: использовать текущую версию в важном проекте — не лучшая идея.
-
-Бейджи помогают похвастаться достижениями: насколько популярен проект, как много разработчиков создавало этот код. Через бейджи можно даже пригласить пользователя в чат:
-
-![Версии](https://github.com/yandex-praktikum/mf.messenger.praktikum.yandex.images/blob/master/mf/vers.png)
-
-В README **Webpack** строка бейджев подробно рассказывает о покрытии кода тестами. Когда проект протестирован, это вызывает доверие пользователя. Последний бейдж приглашает присоединиться к разработке. 
-
-Другая строка убедит пользователя в стабильности инфраструктуры и популярности проекта. Последний бейдж зовёт в чат проекта.
-
-## Описание
-
-Краткое опишите, какую задачу решает проект. Пользователь не верит обещаниям и не готов читать «полотна» текста. Поэтому в описании достаточно нескольких строк:
-
-![Описание](https://github.com/yandex-praktikum/mf.messenger.praktikum.yandex.images/blob/master/mf/desc.png)
-
-Авторы **React** дробят описание на абзацы и списки — так проще пробежаться глазами по тексту и найти ключевую информацию.
-
-Если у проекта есть сайт, добавьте ссылку в заголовок.
+- список контактов и чат (пустой/с выбранной перепиской)
+- ошибка (404, 5хх)
+- профиль пользователя (данные, редактирование, смена пароля)
+- регистрация
+- логин
+- начальная страница с навигацией
 
 ## Установка
 
-Лучше всего пользователя убеждает собственный опыт. Чем быстрее он начнёт пользоваться проектом, тем раньше почувствует пользу. Для этого помогите ему установить приложение: напишите краткую пошаговую инструкцию.
+Склонируйте репозиторий, убедитесь, что используете `npm` не ниже 16 версии.
 
-Если проект предназначен для разработчиков, добавьте информацию об установке тестовых версий. Например:
+```bash
+npm install # запуск установки зависимостей
 
-- `npm install` — установка стабильной версии,
-- `npm start` — запуск версии для разработчика,
-- `npm run build:prod` — сборка стабильной версии.
+npm run start # запуск локального сервера для разработки 
+npm run build # запуск создания билда в папку /dist
+npm run preview # запуск созданого билда
+```
 
-## **Примеры использования**
+## Ссылки
 
-Хорошо, если сразу после установки пользователь сможет решить свои задачи без изучения проекта. Это особенно верно, если ваш пользователь — не профессиональный разработчик. Но даже профессионал поймёт вас лучше, если показать примеры использования:
+- [Yandex.Practicum](https://practicum.yandex.ru/profile/middle-frontend-react/)
+- [Handlebars](https://handlebarsjs.com/)
+- [Изначальный макет в Figma](https://www.figma.com/design/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=1-103&t=uJIVsj39EEPfZF1A-0)
 
-![Ссылки](https://github.com/yandex-praktikum/mf.messenger.praktikum.yandex.images/blob/master/mf/link.png)
+----
 
-Для более подробных инструкции добавьте новые разделы или ссылки:
+## About (en)
 
-- на документацию,
-- вики проекта,
-- описание API.
+Individual Study Project on Creating a Web Messenger.
 
-В учебном проекте будут полезен раздел с описанием стиля кода и правилами разработки: как работать с ветками, пул-реквестами и релизами.
+Demo of the current project version on Netlify: [https://resplendent-rugelach-b118f5.netlify.app/](https://resplendent-rugelach-b118f5.netlify.app/)
 
-### **Команда**
+The project uses Vite as the build tool and Handlebars as the templating engine, with styles compiled using the SASS preprocessor and scripts written in TypeScript.
 
-Если вы работаете в команде, укажите основных участников: им будет приятно, а новые разработчики охотнее присоединятся к проекту. «Гитхаб» — не просто инструмент, это социальная сеть разработчиков.
+Project language: English
 
-![Команда](https://github.com/yandex-praktikum/mf.messenger.praktikum.yandex.images/blob/master/mf/team.png)
+## Current Version
 
-### **Примеры README**
+Functionality implemented within Sprint 1.
 
-- «[Реакт](https://github.com/facebook/react)»,
-- «[Эхо](https://github.com/labstack/echo)»,
-- «[Вебпак](https://github.com/webpack/webpack)»,
-- «[ТДенгине](https://github.com/taosdata/TDengine)»,
-- «[Соул-хантинг](https://github.com/vladpereskokov/soul-hunting/)».
+Created page templates:
+
+- contact list and chat (empty/with a selected conversation)
+- error (404, 5xx)
+- user profile (data, editing, changing password)
+- registration
+- login
+- home page with navigation
+
+## Installation
+
+Clone the repository and ensure you are using npm version 16 or higher.
+
+```bash
+npm install # install dependencies
+
+npm run start # start the local development server
+npm run build # create a build in the /dist folder
+npm run preview # run the created build
+```
+
+## Links
+
+- [Yandex.Practicum](https://practicum.yandex.ru/profile/middle-frontend-react/)
+- [Handlebars](https://handlebarsjs.com/)
+- [Design in Figma](https://www.figma.com/design/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=1-103&t=uJIVsj39EEPfZF1A-0)

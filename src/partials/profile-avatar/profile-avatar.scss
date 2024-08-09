@@ -1,0 +1,32 @@
+.profile__content_avatar {
+  background: var(--dark-10) url("/avatar-bg.svg") 50% 50% / auto no-repeat;
+  width: 100px;
+  height: 100px;
+  border-radius: var(--radius-full);
+  margin: 0 auto;
+
+  &:hover,
+  &:focus {
+    .profile__content_avatar_control {
+      opacity: 1;
+    }
+  }
+
+  &_control {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--dark-10);
+    cursor: pointer;
+    border: none;
+    font-size: var(--text-sm);
+    padding: 1rem;
+    opacity: 0;
+    transition: var(--trs);
+  }
+}

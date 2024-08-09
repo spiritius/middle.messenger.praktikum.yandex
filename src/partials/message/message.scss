@@ -1,0 +1,36 @@
+.message {
+  max-width: 80%;
+  padding: .5rem;
+  border-radius: var(--radius);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  
+  &-contact {
+    margin-right: auto;
+    background: var(--dark-5);
+    border-bottom-left-radius: var(--radius-none);
+  }
+  &-user {
+    background: var(--primary-20);
+    margin-left: auto;
+    border-bottom-right-radius: var(--radius-none);
+  }
+
+  &__date {
+    text-align: right;
+    opacity: 0.8;
+    color: var(--dark-30);
+    display: inline-block;
+    font-size: var(--text-xs);
+    line-height: 1;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    display: block;
+  }
+}

@@ -1,0 +1,42 @@
+.profile__back {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: var(--trs);
+  color: var(--primary-60);
+  position: fixed;
+  z-index: 99;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+
+  &:hover {
+    color: var(--primary);
+  }
+
+  @media (min-width: 992px) {
+    width: 80px;
+    height: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: var(--primary-10);
+    border-right: 1px solid var(--primary-30);
+
+    &:hover {
+      background: var(--primary-30);
+    }
+  }
+
+  svg {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    fill: currentColor;
+    box-shadow: var(--shadow);
+  }
+}

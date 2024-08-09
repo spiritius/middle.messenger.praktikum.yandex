@@ -1,0 +1,12 @@
+<div id="remove-contact" popover class="modal text-center">
+  <form class="modal__form">
+    <h4 class="modal__title">Remove this contact?</h4>
+    <div class="modal__descr">
+      <p>This contact will be removed from your contacts and chat history will be cleaned.</p>
+    </div>
+    <div class="modal__buttons">
+      {{> Button style="light" type="button" title="Cancel" attributes='popovertarget="remove-contact" popovertargetaction="hide"' }}
+      {{> Button style="primary" type="submit" title="Remove" }}
+    </div>
+  </form>
+</div>

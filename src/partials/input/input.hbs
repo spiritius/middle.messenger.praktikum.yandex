@@ -1,0 +1,16 @@
+<div class="input__wrapper">
+  <input 
+    class="input__control {{ style }}" 
+    type="{{ type }}" 
+    name="{{ name }}" 
+    id="{{ name }}" 
+    value="{{ value }}"
+    required="{{ required }}" 
+    placeholder="{{ placeholder }}"
+    {{#if autocomplete}}autocomplete="{{autocomplete}}"{{/if}}
+    {{#if disabled}}disabled{{/if}}>
+  <label class="input__label" for="{{ name }}">{{ label }}</label>
+  {{#if error}}
+  <span class="input__error">{{ error }}</span>
+  {{/if}}
+</div>

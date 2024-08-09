@@ -1,0 +1,9 @@
+<form class="form">
+  <h1 class="form__title">Enter</h1>
+  {{> Input label="Login" type="text" name="login" required="true"}}
+  {{> Input label="Password" type="password" name="password" required="true" autocomplete="off"}}
+  <div class="form__buttons">
+    {{> Button title="Log in" type="submit" style="primary"}}
+    {{> Button title="Create account" type="button" style="link"}}
+  </div>
+</form>

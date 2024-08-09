@@ -1,0 +1,88 @@
+.btn {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 40px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: var(--text);
+  line-height: 1;
+  padding: 8px 16px;
+  transition: var(--trs);
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+
+  &.text-error {
+    color: var(--error);
+  }
+  
+  &-primary {
+    background: var(--primary-60);
+    color: var(--white);
+    
+    &:hover,
+    &:focus {
+      background: var(--primary-50);
+    }
+  }
+
+  &-light {
+    background: var(--dark-10);
+    color: var(--primary-60);
+
+    &:hover,
+    &:focus {
+      color: var(--primary);
+    }
+  }
+
+  &-link {
+    background: transparent;
+    color: var(--primary-60);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    
+    &:hover,
+    &:focus {
+      color: var(--primary-60);
+      text-decoration: none;
+    }
+  }
+
+  &-icon {
+    width: 40px;
+    border-radius: var(--radius-full);
+    padding-left: 0;
+    padding-right: 0;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 24px;
+    background-color: var(--dark-10);
+
+    &:hover,
+    &:focus {
+      background-color: var(--primary-20);
+    }
+
+    &.icon-search {
+      background-color: transparent;
+    }
+  }
+
+  &-send {
+    background-color: var(--accent);
+    background-size: 16px;
+
+    &:hover,
+    &:focus {
+      background-color: var(--primary);
+    }
+  }
+}
