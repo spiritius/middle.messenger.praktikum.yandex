@@ -15,6 +15,14 @@ export default [
       'quotes': ['error', 'single'],
       'semi': ['error', 'always'],
       'curly': [2, 'multi']
-    }
-  }
+    },
+  },
+  {
+    ignores: [
+      '**/dist/**',
+      '**/node_modules/**',
+      '**/*.min.js',
+      '**/.*'
+    ]
+  },
 ];
