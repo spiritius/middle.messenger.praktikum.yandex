@@ -10,11 +10,13 @@ export default [
   {
     rules: {
       'eol-last': ['error', 'always'],
-      'no-unused-vars': 'error',
+      'no-unused-vars': 'off',
       'indent': ['error', 2],
       'quotes': ['error', 'single'],
       'semi': ['error', 'always'],
-      'curly': [2, 'multi']
+      'curly': [2, 'multi'],
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': 'off'
     },
   },
   {

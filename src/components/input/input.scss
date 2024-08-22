@@ -30,7 +30,7 @@
     &:focus ~ .input__label,
     &:not(:placeholder-shown) ~ .input__label,
     &:not(:empty) ~ .input__label {
-      font-size: var(--text-sm);
+      font-size: var(--text-xs);
       width: auto;
       height: auto;
       top: -10px;

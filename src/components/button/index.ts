@@ -1,4 +1,4 @@
 import './button.scss';
-import Button from './button.hbs?raw';
+import Button from './button.ts';
 
 export { Button };

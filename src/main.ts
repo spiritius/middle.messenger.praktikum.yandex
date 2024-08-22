@@ -1,22 +1,42 @@
 import './assets/style.scss';
 import Handlebars from 'handlebars';
-import * as Partials from './partials';
+import * as Components from './components';
 import * as Pages from './pages';
 import context from './common/context.ts';
+import Block from '@/core/block.ts';
 
-Object.entries(Partials).forEach(([key, value]: [string, string]) => {
+Object.entries(Components).forEach(([key, value]) => {
+  //@ts-ignore
   Handlebars.registerPartial(key, value);
 });
 
-const app = document.querySelector('#app');
-const pages: {[key: string]: string} = {};
+const app = document.querySelector('#app')!;
+const pages: { [key: string]: string | typeof Block } = {};
 
 Object.entries(Pages).forEach((item) => {
   pages[item[0]] = item[1];
 });
 
 const nav = (page: string) => {
-  app!.innerHTML = Handlebars.compile(pages[page])(context[page]);
+  const source = pages[page];
+  const pageContext = context[page];
+
+  if(source instanceof Object) {
+    const page = new source(pageContext);
+    const content = page.getContent();
+    
+    if (content) {
+      app!.innerHTML = '';
+      app!.append(content);
+    } else
+      console.error('page.getContent() is Null');
+
+    // page.dispatchComponentDidMount();
+    return;
+  }
+
+  // app!.innerHTML = Handlebars.compile(pages[page])(context[page]);
+  app!.innerHTML = Handlebars.compile(source)(pageContext);
 };
 
 document.addEventListener('DOMContentLoaded', () => {

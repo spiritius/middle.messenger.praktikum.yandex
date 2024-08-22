@@ -1,4 +1,4 @@
 import './input.scss';
-import Input from './input.hbs?raw';
+import Input from './input.ts';
 
 export { Input };

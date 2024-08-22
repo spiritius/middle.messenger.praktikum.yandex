@@ -1,3 +1,3 @@
-import Registration from './registration.hbs?raw';
+import Registration from './registration.ts';
 
 export { Registration };
