@@ -133,6 +133,7 @@ class Block {
     const propsAndStubs = { ...this.props };
 
     Object.entries(this.children).forEach(([key, child]) => {
+      if (child instanceof Array) return;
       propsAndStubs[key] = `<div data-id="${child.#id}"></div>`;
     });
 
@@ -142,6 +143,7 @@ class Block {
     const newElement = fragment.content.firstElementChild as HTMLElement;
 
     Object.values(this.children).forEach(child => {
+      if (child instanceof Array) return;
       const stub = fragment.content.querySelector(`[data-id="${child.#id}"]`);
       stub?.replaceWith(child.getContent()!);
     });
@@ -182,7 +184,7 @@ class Block {
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set: (target, prop: string, value) => {
-        const oldTarget = {...target};
+        const oldTarget = { ...target };
         target[prop] = value;
         // Запускаем обновление компоненты
         this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);

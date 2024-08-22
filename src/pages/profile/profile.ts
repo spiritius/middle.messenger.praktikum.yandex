@@ -70,17 +70,17 @@ class Profile extends Block {
     const onBackBind = this.onBack.bind(this);
     const onChangeAvatarBind = this.onChangeAvatar.bind(this);
 
-    const BackBtn = new ProfileBack({onClick: onBackBind});
-    const Avatar = new ProfileAvatar({onClick: onChangeAvatarBind});
-    const InputEmail = new Input({...data.email, onBlur: (e: Event) => this.handleInputChange(e, 'InputEmail', testEmail, message.email) });
-    const InputLogin = new Input({...data.login, onBlur: (e: Event) => this.handleInputChange(e, 'InputLogin', testLogin, message.loginReg) });
-    const InputFirstName = new Input({...data.first_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputFirstName', testName, message.firstName) });
-    const InputLastName = new Input({...data.last_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputLastName', testName, message.lastName) });
-    const InputDisplayName = new Input({...data.display_name });
-    const InputPhone = new Input({...data.phone, onBlur: (e: Event) => this.handleInputChange(e, 'InputPhone', testPhone, message.phone) });
-    const ChangeButton = new Button({...data.changeBtn });
-    const ChangePasswordButton = new Button({...data.changePasswordBtn });
-    const LogOutButton = new Button({...data.logoutBtn });
+    const BackBtn = new ProfileBack({ onClick: onBackBind });
+    const Avatar = new ProfileAvatar({ onClick: onChangeAvatarBind });
+    const InputEmail = new Input({ ...data.email, onBlur: (e: Event) => this.handleInputChange(e, 'InputEmail', testEmail, message.email) });
+    const InputLogin = new Input({ ...data.login, onBlur: (e: Event) => this.handleInputChange(e, 'InputLogin', testLogin, message.loginReg) });
+    const InputFirstName = new Input({ ...data.first_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputFirstName', testName, message.firstName) });
+    const InputLastName = new Input({ ...data.last_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputLastName', testName, message.lastName) });
+    const InputDisplayName = new Input({ ...data.display_name });
+    const InputPhone = new Input({ ...data.phone, onBlur: (e: Event) => this.handleInputChange(e, 'InputPhone', testPhone, message.phone) });
+    const ChangeButton = new Button({ ...data.changeBtn });
+    const ChangePasswordButton = new Button({ ...data.changePasswordBtn });
+    const LogOutButton = new Button({ ...data.logoutBtn });
 
     this.children = {
       ...this.children,
@@ -114,9 +114,9 @@ class Profile extends Block {
     const inputComponent = this.children[name];
 
     if (!validator(value)) 
-      inputComponent.setProps({error: true, errorText, value, style: 'error'});
+      inputComponent.setProps({ error: true, errorText, value, style: 'error' });
     else 
-      inputComponent.setProps({error: false, value, style: ''});
+      inputComponent.setProps({ error: false, value, style: '' });
   }
 
   onSubmit(e: Event) {

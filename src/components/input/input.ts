@@ -25,7 +25,7 @@ class Input extends Block {
           placeholder="{{ placeholder }}"
           {{#if required}}required{{/if}}
           {{#if autocomplete}}autocomplete="{{autocomplete}}"{{/if}}
-          {{#if disabled}}disabled{{/if}}>
+          {{#if (eq disabled 'true') }}disabled{{/if}}>
         <label class="input__label" for="{{ name }}">{{ label }}</label>
         {{#if error}}
         <span class="input__error">{{ errorText }}</span>

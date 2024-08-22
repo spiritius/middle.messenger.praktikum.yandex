@@ -34,9 +34,9 @@ class Login extends Block {
   init() {
     const onSubmitBind = this.onSubmit.bind(this);
 
-    const InputLogin = new Input({...data.login, onBlur: (e: Event) => this.handleInputChange(e, 'InputLogin', testLength, message.login) });
-    const InputPassword = new Input({...data.password, onBlur: (e: Event) => this.handleInputChange(e, 'InputPassword', testEmptyPassword, message.password) });
-    const SubmitButton = new Button({...data.submit, onClick: onSubmitBind});
+    const InputLogin = new Input({ ...data.login, onBlur: (e: Event) => this.handleInputChange(e, 'InputLogin', testLength, message.login) });
+    const InputPassword = new Input({ ...data.password, onBlur: (e: Event) => this.handleInputChange(e, 'InputPassword', testEmptyPassword, message.password) });
+    const SubmitButton = new Button({ ...data.submit, onClick: onSubmitBind });
     const CreateAccountButton = new Button(data.create);
 
     this.children = {
@@ -76,9 +76,9 @@ class Login extends Block {
     const inputComponent = this.children[name];
 
     if (!validator(value)) 
-      inputComponent.setProps({error: true, errorText, value, style: 'error'});
+      inputComponent.setProps({ error: true, errorText, value, style: 'error' });
     else 
-      inputComponent.setProps({error: false, value, style: ''});
+      inputComponent.setProps({ error: false, value, style: '' });
   }
 
   validateForm() {

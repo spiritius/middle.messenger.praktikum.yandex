@@ -68,14 +68,14 @@ class Registration extends Block {
     const onSubmitBind = this.onSubmit.bind(this);
     const onInputRepeatPasswordChangeBind = this.onInputRepeatPasswordChange.bind(this);
 
-    const InputEmail = new Input({...data.email, onBlur: (e: Event) => this.handleInputChange(e, 'InputEmail', testEmail, message.email) });
-    const InputLogin = new Input({...data.login, onBlur: (e: Event) => this.handleInputChange(e, 'InputLogin', testLogin, message.loginReg)});
-    const InputFirstName = new Input({...data.first_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputFirstName', testName, message.firstName) });
-    const InputLastName = new Input({...data.last_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputLastName', testName, message.lastName) });
-    const InputPhone = new Input({...data.phone, onBlur: (e: Event) => this.handleInputChange(e, 'InputPhone', testPhone, message.phone) });
-    const InputPassword = new Input({...data.password, onBlur: (e: Event) => this.handleInputChange(e, 'InputPassword', testPassword, message.passwordReg) });
-    const InputRepeatPassword = new Input({...data.repeatPassword, onBlur: onInputRepeatPasswordChangeBind});
-    const CreateButton = new Button({...data.createBtn, onClick: onSubmitBind});
+    const InputEmail = new Input({ ...data.email, onBlur: (e: Event) => this.handleInputChange(e, 'InputEmail', testEmail, message.email) });
+    const InputLogin = new Input({ ...data.login, onBlur: (e: Event) => this.handleInputChange(e, 'InputLogin', testLogin, message.loginReg) });
+    const InputFirstName = new Input({ ...data.first_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputFirstName', testName, message.firstName) });
+    const InputLastName = new Input({ ...data.last_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputLastName', testName, message.lastName) });
+    const InputPhone = new Input({ ...data.phone, onBlur: (e: Event) => this.handleInputChange(e, 'InputPhone', testPhone, message.phone) });
+    const InputPassword = new Input({ ...data.password, onBlur: (e: Event) => this.handleInputChange(e, 'InputPassword', testPassword, message.passwordReg) });
+    const InputRepeatPassword = new Input({ ...data.repeatPassword, onBlur: onInputRepeatPasswordChangeBind });
+    const CreateButton = new Button({ ...data.createBtn, onClick: onSubmitBind });
     const LoginButton = new Button(data.loginBtn);
 
     this.children = {
@@ -119,9 +119,9 @@ class Registration extends Block {
     const inputComponent = this.children[name];
 
     if (!validator(value)) 
-      inputComponent.setProps({error: true, errorText, value, style: 'error'});
+      inputComponent.setProps({ error: true, errorText, value, style: 'error' });
     else 
-      inputComponent.setProps({error: false, value, style: ''});
+      inputComponent.setProps({ error: false, value, style: '' });
   }
 
   onInputRepeatPasswordChange(e: Event) {
@@ -131,9 +131,9 @@ class Registration extends Block {
     const pwdValue = pwdInput!.querySelector('input')!.value;
 
     if(value !== pwdValue)
-      this.children.InputRepeatPassword.setProps({error: true, errorText: message.passwordMatch, value, style: 'error'});
+      this.children.InputRepeatPassword.setProps({ error: true, errorText: message.passwordMatch, value, style: 'error' });
     else 
-      this.children.InputRepeatPassword.setProps({error: false, value, style: ''});
+      this.children.InputRepeatPassword.setProps({ error: false, value, style: '' });
   }
 
   validateForm() {

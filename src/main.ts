@@ -12,7 +12,7 @@ Handlebars.registerHelper('eq', function (value1, value2) {
 });
 
 Object.entries(Components).forEach(([key, value]) => {
-  //@ts-ignore
+  //@ts-expect-error wft
   Handlebars.registerPartial(key, value);
 });
 
@@ -41,7 +41,6 @@ const nav = (page: string) => {
     return;
   }
 
-  // app!.innerHTML = Handlebars.compile(pages[page])(context[page]);
   app!.innerHTML = Handlebars.compile(source)(pageContext);
 };
 
@@ -56,18 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (page) 
         nav(page);
     }
-
-    if (target.matches('#profileChange')) 
-      nav('ProfileChange');
-
-    if (target.matches('#passwordChange')) 
-      nav('PasswordChange');
-
-    if (target.matches('#sidebarContact')) 
-      nav('Chat');
-
-    if (target.matches('#sidebarProfile')) 
-      nav('Profile');
   });
 
   app!.addEventListener('input', (e) => {

@@ -2,9 +2,6 @@ import Block from '@/core/block';
 
 class Dropdown extends Block {
   init() {
-    this.children = {
-      ...this.children,
-    };
     this.name = 'Dropdown';
   }
 

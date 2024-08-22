@@ -5,6 +5,6 @@ export { Button } from './button';
 export { ProfileBack } from './profile-back';
 export { ProfileAvatar } from './profile-avatar';
 export { ModalAvatar, ModalAddContact, ModalRemoveContact } from './modal';
-export { SidebarContact } from './sidebar-contact';
+export { SidebarList } from './sidebar-list';
 export { Dropdown } from './dropdown';
-export { ChatMessage } from './message';
+export { MessageStack } from './message-stack';

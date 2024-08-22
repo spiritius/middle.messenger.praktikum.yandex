@@ -37,8 +37,7 @@ class ModalAddContact extends Block {
 
   render(): string {
     return `
-      <div id="add-contact"
-          popover: class="modal text-center">,
+      <div id="add-contact" popover class="modal text-center">,
         <form class="modal__form">
           <h4 class="modal__title">Add new contact</h4>
           {{{ InputUser }}}

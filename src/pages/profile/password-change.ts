@@ -35,11 +35,11 @@ class Profile extends Block {
     const onSubmitBind = this.onSubmit.bind(this);
     const onRepeatNewPwdBind = this.onRepeatNewPwd.bind(this);
 
-    const BackBtn = new ProfileBack({onClick: onBackBind});
-    const InputCurrenPwd = new Input({...data.currentPwd, onBlur: (e: Event) => this.handleInputChange(e, 'InputCurrenPwd', testEmptyPassword, message.password) });
-    const InputNewPwd = new Input({...data.newPwd, onBlur: (e: Event) => this.handleInputChange(e, 'InputNewPwd', testPassword, message.passwordReg) });
-    const InputRepeatNewPwd = new Input({...data.repeatNewPwd, onBlur: onRepeatNewPwdBind });
-    const SubmitButton = new Button({...data.submit, onClick: onSubmitBind});
+    const BackBtn = new ProfileBack({ onClick: onBackBind });
+    const InputCurrenPwd = new Input({ ...data.currentPwd, onBlur: (e: Event) => this.handleInputChange(e, 'InputCurrenPwd', testEmptyPassword, message.password) });
+    const InputNewPwd = new Input({ ...data.newPwd, onBlur: (e: Event) => this.handleInputChange(e, 'InputNewPwd', testPassword, message.passwordReg) });
+    const InputRepeatNewPwd = new Input({ ...data.repeatNewPwd, onBlur: onRepeatNewPwdBind });
+    const SubmitButton = new Button({ ...data.submit, onClick: onSubmitBind });
 
     this.children = {
       ...this.children,
@@ -64,9 +64,9 @@ class Profile extends Block {
     const pwdValue = pwdInput!.querySelector('input')!.value;
 
     if(value !== pwdValue)
-      this.children.InputRepeatNewPwd.setProps({error: true, errorText: message.passwordMatch, value, style: 'error'});
+      this.children.InputRepeatNewPwd.setProps({ error: true, errorText: message.passwordMatch, value, style: 'error' });
     else 
-      this.children.InputRepeatNewPwd.setProps({error: false, value, style: ''});
+      this.children.InputRepeatNewPwd.setProps({ error: false, value, style: '' });
   }
 
   handleInputChange(e: Event, name: string, validator: (value: string) => boolean, errorText: string) {
@@ -76,9 +76,9 @@ class Profile extends Block {
     const inputComponent = this.children[name];
 
     if (!validator(value)) 
-      inputComponent.setProps({error: true, errorText, value, style: 'error'});
+      inputComponent.setProps({ error: true, errorText, value, style: 'error' });
     else 
-      inputComponent.setProps({error: false, value, style: ''});
+      inputComponent.setProps({ error: false, value, style: '' });
   }
 
   onSubmit(e: Event) {

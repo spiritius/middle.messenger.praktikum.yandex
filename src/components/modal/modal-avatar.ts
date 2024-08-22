@@ -6,8 +6,8 @@ class ModalAvatar extends Block {
   init() {
     const onSubmitBind = this.onSubmit.bind(this);
 
-    const UploadFile = new FileInput({name: 'avatar', label: 'Choose a file on your computer' });
-    const SubmitButton = new Button({style: 'primary', type: 'submit', title: 'Upload', onClick: onSubmitBind });
+    const UploadFile = new FileInput({ name: 'avatar', label: 'Choose a file on your computer' });
+    const SubmitButton = new Button({ style: 'primary', type: 'submit', title: 'Upload', onClick: onSubmitBind });
 
     this.children = {
       ...this.children,
