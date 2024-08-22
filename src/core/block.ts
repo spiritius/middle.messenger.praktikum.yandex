@@ -80,7 +80,10 @@ class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidMount(oldProps: Props = {}): void {}
+  componentDidMount(oldProps: Props = {}): void {
+    console.log(oldProps);
+    
+  }
 
   dispatchComponentDidMount(): void {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -98,6 +101,8 @@ class Block {
 
   // Может переопределять пользователь, необязательно трогать
   componentDidUpdate(oldProps?: Props, newProps?: Props): boolean {
+    console.log(oldProps, newProps);
+    
     return true;
   }
 

@@ -2,7 +2,7 @@ import Block from '@/core/block';
 import { ProfileBack } from '@/components/profile-back';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
-import { testLogin, testEmail, testPassword, testEmptyPassword } from '@/utils/validation';
+import { testPassword, testEmptyPassword } from '@/utils/validation';
 import { message } from '@/common/validationMessage';
 
 const data = {

@@ -18,7 +18,7 @@ type OptionsWithoutMethod = Omit<Options, 'method'>;
 // Этот тип эквивалентен следующему:
 // type OptionsWithoutMethod = { data?: any };
 
-function queryStringify(data) {
+function queryStringify(data: {[key: string]: string}) {
   // Можно делать трансформацию GET-параметров в отдельной функции
   if (typeof data !== 'object')
     throw new Error('Data is not object');
