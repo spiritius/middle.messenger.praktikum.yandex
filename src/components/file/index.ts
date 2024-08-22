@@ -1,4 +1,4 @@
 import './file.scss';
-import File from './file.hbs?raw';
+import FileInput from './file.ts';
 
-export { File };
+export { FileInput };

@@ -2,7 +2,7 @@ export function testRegex(value: string, regex: RegExp): boolean {
   return regex.test(value);
 }
 
-export function testLength(value: string, min: number, max: number): boolean {
+export function testLength(value: string, min: number = 3, max: number = 20): boolean {
   return value.length >= min && value.length <= max;
 }
 

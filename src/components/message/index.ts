@@ -1,4 +1,4 @@
 import './message.scss';
-import Message from './message.hbs?raw';
+import ChatMessage from './message.ts';
 
-export { Message };
+export { ChatMessage };

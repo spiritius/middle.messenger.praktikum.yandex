@@ -1,3 +1,3 @@
-import Link from './link.hbs?raw';
+import Link from './link.ts';
 
 export { Link };

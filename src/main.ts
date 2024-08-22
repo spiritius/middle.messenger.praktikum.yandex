@@ -5,6 +5,12 @@ import * as Pages from './pages';
 import context from './common/context.ts';
 import Block from '@/core/block.ts';
 
+// helper for if condition 
+Handlebars.registerHelper('eq', function (value1, value2) {
+  if (value1 == value2)
+    return true;
+});
+
 Object.entries(Components).forEach(([key, value]) => {
   //@ts-ignore
   Handlebars.registerPartial(key, value);
@@ -56,9 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (target.matches('#passwordChange')) 
       nav('PasswordChange');
-
-    if (target.matches('#profileBack')) 
-      nav('Chat');
 
     if (target.matches('#sidebarContact')) 
       nav('Chat');

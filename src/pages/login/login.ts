@@ -1,7 +1,8 @@
 import Block from '@/core/block';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
-import { testLogin, testEmptyPassword } from '@/utils/validation';
+import { testLength, testEmptyPassword } from '@/utils/validation';
+import { message } from '@/common/validationMessage';
 
 const data = {
   login: {
@@ -32,11 +33,9 @@ const data = {
 class Login extends Block {
   init() {
     const onSubmitBind = this.onSubmit.bind(this);
-    // const onLoginChangeBind = this.onLoginChange.bind(this);
-    // const onPasswordChangeBind = this.onPasswordChange.bind(this);
 
-    const InputLogin = new Input({...data.login, onBlur: (e: Event) => this.handleInputChange(e, 'InputLogin', testLogin, 'Fill in your login') });
-    const InputPassword = new Input({...data.password, onBlur: (e: Event) => this.handleInputChange(e, 'InputPassword', testEmptyPassword, 'Fill in your password') });
+    const InputLogin = new Input({...data.login, onBlur: (e: Event) => this.handleInputChange(e, 'InputLogin', testLength, message.login) });
+    const InputPassword = new Input({...data.password, onBlur: (e: Event) => this.handleInputChange(e, 'InputPassword', testEmptyPassword, message.password) });
     const SubmitButton = new Button({...data.submit, onClick: onSubmitBind});
     const CreateAccountButton = new Button(data.create);
 
@@ -86,8 +85,8 @@ class Login extends Block {
     let isValid = true;
 
     const fields = [
-      { name: 'InputLogin', validator: testLogin, errorText: 'Fill in your login' },
-      { name: 'InputPassword', validator: testEmptyPassword, errorText: 'Fill in your password' },
+      { name: 'InputLogin', validator: testLength, errorText: message.login },
+      { name: 'InputPassword', validator: testEmptyPassword, errorText: message.password },
     ];
   
     fields.forEach(field => {

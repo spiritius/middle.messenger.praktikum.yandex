@@ -1,4 +1,4 @@
 import './dropdown.scss';
-import Dropdown from './dropdown.hbs?raw';
+import Dropdown from './dropdown.ts';
 
 export { Dropdown };

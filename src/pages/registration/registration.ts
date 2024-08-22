@@ -2,6 +2,7 @@ import Block from '@/core/block';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { testLogin, testEmail, testName, testPhone, testPassword } from '@/utils/validation';
+import { message } from '@/common/validationMessage';
 
 const data = {
   email: {
@@ -67,12 +68,12 @@ class Registration extends Block {
     const onSubmitBind = this.onSubmit.bind(this);
     const onInputRepeatPasswordChangeBind = this.onInputRepeatPasswordChange.bind(this);
 
-    const InputEmail = new Input({...data.email, onBlur: (e: Event) => this.handleInputChange(e, 'InputEmail', testEmail, 'Email is incorrect, check yourself please') });
-    const InputLogin = new Input({...data.login, onBlur: (e: Event) => this.handleInputChange(e, 'InputLogin', testLogin, 'Login should be 3-20 symbols, contains latin letters or numbers, - or _')});
-    const InputFirstName = new Input({...data.first_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputFirstName', testName, 'No numbers or special symbols, first letter should be capitalized') });
-    const InputLastName = new Input({...data.last_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputLastName', testName, 'No numbers or special symbols, first letter should be capitalized') });
-    const InputPhone = new Input({...data.phone, onBlur: (e: Event) => this.handleInputChange(e, 'InputPhone', testPhone, 'Numbers and +') });
-    const InputPassword = new Input({...data.password, onBlur: (e: Event) => this.handleInputChange(e, 'InputPassword', testPassword, 'Password should be 8-40 symbols, and must contain at least one uppercase letter and number') });
+    const InputEmail = new Input({...data.email, onBlur: (e: Event) => this.handleInputChange(e, 'InputEmail', testEmail, message.email) });
+    const InputLogin = new Input({...data.login, onBlur: (e: Event) => this.handleInputChange(e, 'InputLogin', testLogin, message.loginReg)});
+    const InputFirstName = new Input({...data.first_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputFirstName', testName, message.firstName) });
+    const InputLastName = new Input({...data.last_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputLastName', testName, message.lastName) });
+    const InputPhone = new Input({...data.phone, onBlur: (e: Event) => this.handleInputChange(e, 'InputPhone', testPhone, message.phone) });
+    const InputPassword = new Input({...data.password, onBlur: (e: Event) => this.handleInputChange(e, 'InputPassword', testPassword, message.passwordReg) });
     const InputRepeatPassword = new Input({...data.repeatPassword, onBlur: onInputRepeatPasswordChangeBind});
     const CreateButton = new Button({...data.createBtn, onClick: onSubmitBind});
     const LoginButton = new Button(data.loginBtn);
@@ -130,7 +131,7 @@ class Registration extends Block {
     const pwdValue = pwdInput!.querySelector('input')!.value;
 
     if(value !== pwdValue)
-      this.children.InputRepeatPassword.setProps({error: true, errorText: 'Passwords are not match each other', value, style: 'error'});
+      this.children.InputRepeatPassword.setProps({error: true, errorText: message.passwordMatch, value, style: 'error'});
     else 
       this.children.InputRepeatPassword.setProps({error: false, value, style: ''});
   }
@@ -139,13 +140,13 @@ class Registration extends Block {
     let isValid = true;
 
     const fields = [
-      { name: 'InputEmail', validator: testEmail, errorText: 'Email is incorrect, check yourself please' },
-      { name: 'InputLogin', validator: testLogin, errorText: 'Login should be 3-20 symbols, contains latin letters or numbers, - or _' },
-      { name: 'InputFirstName', validator: testName, errorText: 'No numbers or special symbols, first letter should be capitalized' },
-      { name: 'InputLastName', validator: testName, errorText: 'No numbers or special symbols, first letter should be capitalized' },
-      { name: 'InputPhone', validator: testPhone, errorText: 'Numbers and +' },
-      { name: 'InputPassword', validator: testPassword, errorText: 'Password should be 8-40 symbols, and must contain at least one uppercase letter and number' },
-      { name: 'InputRepeatPassword', validator: (value: string) => value === this.children.InputPassword.props.value, errorText: 'Passwords are not match each other' }
+      { name: 'InputEmail', validator: testEmail, errorText: message.email },
+      { name: 'InputLogin', validator: testLogin, errorText: message.loginReg },
+      { name: 'InputFirstName', validator: testName, errorText: message.firstName },
+      { name: 'InputLastName', validator: testName, errorText: message.lastName },
+      { name: 'InputPhone', validator: testPhone, errorText: message.phone },
+      { name: 'InputPassword', validator: testPassword, errorText: message.passwordReg },
+      { name: 'InputRepeatPassword', validator: (value: string) => value === this.children.InputPassword.props.value, errorText: message.passwordMatch }
     ];
   
     fields.forEach(field => {

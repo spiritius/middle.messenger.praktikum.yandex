@@ -1,4 +1,4 @@
 import './profile-back.scss';
-import ProfileBack from './profile-back.hbs?raw';
+import ProfileBack from './profile-back.ts';
 
 export { ProfileBack };
