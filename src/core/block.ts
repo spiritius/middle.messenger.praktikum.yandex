@@ -46,12 +46,25 @@ class Block {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((item) => {
-      const [eventName, selector] = item.split('|');
+      const [eventName, selector] = item.split('|'); // хак для случаев, когда надо навесить событие на элемент внутри шаблона
 
       const targetElement = selector ? this.#element?.querySelector(selector) : this.#element;
 
       if (targetElement)
         targetElement.addEventListener(eventName, events[item]);
+    });
+  }
+
+  #removeEvents(): void {
+    const { events = {} } = this.props;
+
+    Object.keys(events).forEach((item) => {
+      const [eventName, selector] = item.split('|');
+      const handler = events[item];
+      const targetElement = selector ? this.#element?.querySelector(selector) : this.#element;
+
+      if (targetElement) 
+        targetElement.removeEventListener(eventName, handler);
     });
   }
 
@@ -81,8 +94,7 @@ class Block {
 
   // Может переопределять пользователь, необязательно трогать
   componentDidMount(oldProps: Props = {}): void {
-    console.log(oldProps);
-    
+    console.log('CDM, oldProps:', oldProps);
   }
 
   dispatchComponentDidMount(): void {
@@ -141,6 +153,8 @@ class Block {
       if (child instanceof Array) return;
       propsAndStubs[key] = `<div data-id="${child.#id}"></div>`;
     });
+
+    this.#removeEvents();
 
     const fragment = this.#createDocumentElement('template') as HTMLTemplateElement;
     fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);

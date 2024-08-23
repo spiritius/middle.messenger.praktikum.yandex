@@ -14,9 +14,11 @@ type Options = {
 
 // Тип Omit принимает два аргумента: первый — тип, второй — строка
 // и удаляет из первого типа ключ, переданный вторым аргументом
-type OptionsWithoutMethod = Omit<Options, 'method'>;
+// type OptionsWithoutMethod = Omit<Options, 'method'>;
 // Этот тип эквивалентен следующему:
 // type OptionsWithoutMethod = { data?: any };
+
+type HTTPMethod = (url: string, options?: Options) => Promise<unknown>
 
 function queryStringify(data: {[key: string]: string}) {
   // Можно делать трансформацию GET-параметров в отдельной функции
@@ -32,19 +34,19 @@ function queryStringify(data: {[key: string]: string}) {
 }
 
 class HTTPTransport {
-  get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  get: HTTPMethod = (url, options) => {
     return this.request(url, { ...options, method: METHOD.GET });
   };
 
-  put(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  put: HTTPMethod = (url, options) => {
     return this.request(url, { ...options, method: METHOD.PUT });
   };
 
-  post(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  post: HTTPMethod = (url, options) => {
     return this.request(url, { ...options, method: METHOD.POST });
   };
 
-  delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  delete: HTTPMethod = (url, options) => {
     return this.request(url, { ...options, method: METHOD.DELETE });
   };
 
