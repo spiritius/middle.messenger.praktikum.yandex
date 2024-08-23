@@ -19,16 +19,16 @@
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow);
     width: calc(100% - 2rem);
-    min-height: calc(100dvh - 60px - 2rem);
+    // min-height: calc(100dvh - 60px - 2rem);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap: 20px;
     
-    @media (min-width: 992px) {
+    @media (min-width: 768px) {
       width: calc(100% - 80px - 2rem);
       max-width: 600px;
-      min-height: 0;
+      // min-height: 0;
     }
 
     &_name {
@@ -44,10 +44,10 @@
       &_row {
         position: relative;
 
-        span {
-          @media (min-width: 992px) {
+        &_title {
+          @media (min-width: 768px) {
             position: absolute;
-            bottom: 0;
+            top: 7px;
             left: 0;
             height: 30px;
             padding: 0.5rem 0;

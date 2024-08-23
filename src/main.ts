@@ -1,22 +1,47 @@
 import './assets/style.scss';
 import Handlebars from 'handlebars';
-import * as Partials from './partials';
+import * as Components from './components';
 import * as Pages from './pages';
 import context from './common/context.ts';
+import Block from '@/core/block.ts';
 
-Object.entries(Partials).forEach(([key, value]: [string, string]) => {
+// helper for if condition 
+Handlebars.registerHelper('eq', function (value1, value2) {
+  if (value1 == value2)
+    return true;
+});
+
+Object.entries(Components).forEach(([key, value]) => {
+  //@ts-expect-error wft
   Handlebars.registerPartial(key, value);
 });
 
-const app = document.querySelector('#app');
-const pages: {[key: string]: string} = {};
+const app = document.querySelector('#app')!;
+const pages: { [key: string]: string | typeof Block } = {};
 
 Object.entries(Pages).forEach((item) => {
   pages[item[0]] = item[1];
 });
 
 const nav = (page: string) => {
-  app!.innerHTML = Handlebars.compile(pages[page])(context[page]);
+  const source = pages[page];
+  const pageContext = context[page];
+
+  if(source instanceof Object) {
+    const page = new source(pageContext);
+    const content = page.getContent();
+    
+    if (content) {
+      app!.innerHTML = '';
+      app!.append(content);
+    } else
+      console.error('page.getContent() is Null');
+
+    // page.dispatchComponentDidMount();
+    return;
+  }
+
+  app!.innerHTML = Handlebars.compile(source)(pageContext);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,21 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (page) 
         nav(page);
     }
-
-    if (target.matches('#profileChange')) 
-      nav('ProfileChange');
-
-    if (target.matches('#passwordChange')) 
-      nav('PasswordChange');
-
-    if (target.matches('#profileBack')) 
-      nav('Chat');
-
-    if (target.matches('#sidebarContact')) 
-      nav('Chat');
-
-    if (target.matches('#sidebarProfile')) 
-      nav('Profile');
   });
 
   app!.addEventListener('input', (e) => {

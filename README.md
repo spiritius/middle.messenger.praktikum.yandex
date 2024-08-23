@@ -12,16 +12,13 @@
 
 ## Текущая версия
 
-Функционал реализован в рамках Спринта 1.
+Функционал реализован в рамках Спринта 2.
 
-Сверстаны шаблоны страниц:
-
-- список контактов и чат (пустой/с выбранной перепиской)
-- ошибка (404, 5хх)
-- профиль пользователя (данные, редактирование, смена пароля)
-- регистрация
-- логин
-- начальная страница с навигацией
+- добавлены eslint и stylelint, обновлены их конфиги, их автозапуск добавлен в дев-мод
+- реализована работа на классах Block и EventBus
+- все скрипты переписаны на TS
+- добавлена валидация форм и сбор данных в консоль
+- добавлена реализация fetch по примеру из практики
 
 ## Установка
 
@@ -55,16 +52,13 @@ Project language: English
 
 ## Current Version
 
-Functionality implemented within Sprint 1.
+Functionality implemented within Sprint 2.
 
-Created page templates:
-
-- contact list and chat (empty/with a selected conversation)
-- error (404, 5xx)
-- user profile (data, editing, changing password)
-- registration
-- login
-- home page with navigation
+	- Added ESLint and Stylelint, updated their configurations, and integrated auto-run in dev mode.
+	- Implemented functionality using the Block and EventBus classes.
+	- All scripts were rewritten in TypeScript.
+	- Added form validation and logging of data to the console.
+	- Implemented fetch based on the practice example.
 
 ## Installation
 

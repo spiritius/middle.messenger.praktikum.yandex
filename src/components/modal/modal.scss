@@ -1,0 +1,50 @@
+.modal {
+  width: 100%;
+  max-width: calc(100% - 2rem);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  border: none;
+  background-color: var(--white);
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  @media (min-width: 768px) {
+    max-width: 400px;
+  }
+  @media (min-width: 992px) {
+    transform: translate(calc(-50% + 40px), -50%);
+    max-width: 400px;
+    padding: 2rem;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+  }
+  &__title {
+    font-size: var(--text-lg);
+  }
+  &__buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+  }
+  &__descr {
+    font-size: var(--text-sm);
+  }
+}
+
+:popover-open {
+  display: flex;
+}
+
+::backdrop {
+  background-color: var(--dark);
+  opacity: 0.3;
+}
