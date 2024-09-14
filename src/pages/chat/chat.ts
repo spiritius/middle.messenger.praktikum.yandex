@@ -1,19 +1,26 @@
 import Block from '@/core/block';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
-import { Dropdown } from '@/components/dropdown';
+import { Dropdown, DropdownSettings } from '@/components/dropdown';
 import { SidebarList } from '@/components/sidebar-list';
 import { MessageStack } from '@/components/message-stack';
 import { ModalAddContact, ModalRemoveContact } from '@/components/modal';
+import { addChat, getChats } from '@/services/chat';
+import { connect } from '@/utils/connect';
+import { AddChat } from '@/api/types';
 
-class Chat extends Block {
+export class Chat extends Block {
+  chats: object[] | undefined | unknown;
   init() {
 
-    const modalContactAdd = new ModalAddContact();
+    const addChatBind = this.addChat.bind(this);
+    const onChatClickBind = this.onChatClick.bind(this);
+
+    const modalContactAdd = new ModalAddContact({ onSubmit: addChatBind });
     const modalContactRemove = new ModalRemoveContact();
 
     const HeaderOptionBtn = new Button({ type: 'button', style: 'icon icon-options', title: '' });
-    const HeaderOptionDropdown = new Dropdown({ position: 'top-left', list: this.props.options });
+    const HeaderOptionDropdown = new DropdownSettings();
 
     const ContactOptionsBtn = new Button({ type: 'button', style: 'icon icon-menu', title: '' });
     const ContactOptionsDropdown = new Dropdown({ position: 'top-right', list: this.props.contactOptions });
@@ -27,10 +34,11 @@ class Chat extends Block {
     const MessageList = new MessageStack({ list: this.props.messages });
     const MessageSubmitButton = new Button({ type: 'submit', style: 'icon icon-send btn-send', title: '' });
 
-    const SidebarContactsList = new SidebarList({ list: this.props.contacts });
+    const SidebarContactsList = new SidebarList({ list: this.props.contacts, onClick: onChatClickBind });
 
     this.children = {
       ...this.children,
+      //@ts-expect-error wft
       modalContactAdd,
       modalContactRemove,
       HeaderOptionBtn,
@@ -47,6 +55,52 @@ class Chat extends Block {
     };
 
     this.name = 'Chat';
+    this.chats = [];
+  }
+
+  beforeMount(): void {
+    this.updateChatList();
+  }
+
+  addChat(e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const target = e.target as HTMLFormElement;
+    const form = target!.form;
+    
+    const output: AddChat = {
+      title: form.querySelector('input').value
+    };
+
+    addChat(output)
+      .then(() => {
+        this.updateChatList();
+      });
+  }
+
+  updateChatList(): void {
+    console.log('--updateChatList');
+    
+    getChats()
+      .then((response) => {
+        if (typeof response === 'string') 
+          this.chats = JSON.parse(response);
+        else 
+          this.chats = response;
+  
+        if (Array.isArray(this.chats)) 
+          this.children['SidebarContactsList'].setProps({ list: this.chats });
+        
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  onChatClick(e: Event) {
+    console.log(e);
+    
   }
 
   render() {
@@ -109,4 +163,6 @@ class Chat extends Block {
   }
 };
 
-export default Chat;
+const mapStateToPropsShort = ({ isLoading, errorMessage, popoverIsOpen }: { [key: string]: any }) => ({ isLoading, errorMessage, popoverIsOpen });
+
+export default connect(mapStateToPropsShort)(Chat);

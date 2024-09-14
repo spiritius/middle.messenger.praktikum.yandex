@@ -3,6 +3,9 @@ import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { testLogin, testEmail, testName, testPhone, testPassword } from '@/utils/validation';
 import { message } from '@/common/validationMessage';
+import { connect } from '@/utils/connect';
+import { signup } from '@/services/auth';
+import { SignUpRequestData } from '@/api/types';
 
 const data = {
   email: {
@@ -10,30 +13,35 @@ const data = {
     type: 'email',
     name: 'email',
     required: 'true',
+    value: 'icquser2@mail.ru'
   },
   login: {
     label: 'Login',
     type: 'text',
     name: 'login',
     required: 'true',
+    value: 'icquser2'
   },
   first_name: {
     label: 'First name',
     type: 'text',
     name: 'first_name',
     required: 'false',
+    value: 'Rom'
   },
   last_name: {
     label: 'Last name',
     type: 'text',
     name: 'second_name',
     required: 'false',
+    value: 'Burning'
   },
   phone: {
     label: 'Phone',
     type: 'tel',
     name: 'phone',
     required: 'false',
+    value: '+799901234567'
   },
   password: {
     label: 'Password',
@@ -42,6 +50,7 @@ const data = {
     minlength: '8',
     required: 'true',
     autocomplete: 'off',
+    value: '1234qwerA'
   },
   repeatPassword: {
     label: 'Repeat password',
@@ -50,6 +59,7 @@ const data = {
     minlength: '8',
     required: 'true',
     autocomplete: 'off',
+    value: '1234qwerA'
   },
   createBtn: {
     title: 'Create account',
@@ -63,9 +73,10 @@ const data = {
   }
 };
 
-class Registration extends Block {
+export class Registration extends Block {
   init() {
     const onSubmitBind = this.onSubmit.bind(this);
+    const onLoginBind = this.onLogin.bind(this);
     const onInputRepeatPasswordChangeBind = this.onInputRepeatPasswordChange.bind(this);
 
     const InputEmail = new Input({ ...data.email, onBlur: (e: Event) => this.handleInputChange(e, 'InputEmail', testEmail, message.email) });
@@ -76,7 +87,7 @@ class Registration extends Block {
     const InputPassword = new Input({ ...data.password, onBlur: (e: Event) => this.handleInputChange(e, 'InputPassword', testPassword, message.passwordReg) });
     const InputRepeatPassword = new Input({ ...data.repeatPassword, onBlur: onInputRepeatPasswordChangeBind });
     const CreateButton = new Button({ ...data.createBtn, onClick: onSubmitBind });
-    const LoginButton = new Button(data.loginBtn);
+    const LoginButton = new Button({ ...data.loginBtn, onClick: onLoginBind });
 
     this.children = {
       ...this.children,
@@ -104,12 +115,14 @@ class Registration extends Block {
     const target = e.target as HTMLFormElement;
     const form = target!.form;
     const formData = new FormData(form);
-    const output: {[key: string]: FormDataEntryValue} = {};
+    const output: SignUpRequestData = {} as SignUpRequestData;
 
     formData.forEach((value, key) => {
-      output[key] = value;
+      output[key] = value.toString();
     });
+
     console.log(output);
+    signup(output);
   }
 
   handleInputChange(e: Event, name: string, validator: (value: string) => boolean, errorText: string) {
@@ -163,10 +176,17 @@ class Registration extends Block {
     return isValid;
   }
 
+  onLogin() {
+    window.router.go('/');
+  }
+
   render() {
     return `
-        <form class="form">
+        <form class="form {{#if isLoading}}loading{{/if}}">
           <h1 class="form__title">Sign Up</h1>
+          {{#if errorMessage}}
+          <small class="text-center text-error">{{{errorMessage}}}</small>
+          {{/if}}
           {{{ InputEmail }}}
           {{{ InputLogin }}}
           {{{ InputFirstName }}}
@@ -184,4 +204,6 @@ class Registration extends Block {
   }
 };
 
-export default Registration;
+const mapStateToPropsShort = ({ isLoading, errorMessage }: { [key: string]: any }) => ({ isLoading, errorMessage });
+
+export default connect(mapStateToPropsShort)(Registration);

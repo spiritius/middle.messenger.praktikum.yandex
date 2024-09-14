@@ -8,11 +8,12 @@ class Dropdown extends Block {
   render() {
     return `
       <div class="dropdown dropdown--{{position}}">
-        <ul>
+        <ul class="dropdown__list">
         {{#each list}}
-          <li>
+          <li class="dropdown__item">
             <button 
               type="button"
+              class="dropdown__btn"
               id={{id}}
               {{#if popover}}
               popovertarget="{{popover}}" 

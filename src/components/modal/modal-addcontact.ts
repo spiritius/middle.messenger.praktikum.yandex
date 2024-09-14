@@ -1,46 +1,56 @@
 import Block from '@/core/block';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
+import { connect } from '@/utils/connect';
+import { addChat } from '@/services/chat';
+import { AddChat } from '@/api/types';
 
 const data = {
   input: {
     type: 'text',
-    label: 'Login',
-    name: 'user-login',
+    label: 'Title',
+    name: 'title',
     style: 'text-left',
   },
   submit: {
     style: 'primary',
-    type: 'submit',
+    type: 'button',
     title: 'Add',
   }
 };
 
-class ModalAddContact extends Block {
+export class ModalAddContact extends Block {
   init() {
-    const onSubmitBind = this.onSubmit.bind(this);
+    const onChangeBind = this.onChange.bind(this);
 
-    const InputUser = new Input({ ...data.input });
-    const SubmitButton = new Button({ ...data.submit, onClick: onSubmitBind });
+    const InputTitle = new Input({ ...data.input, onInput: onChangeBind });
+    const SubmitButton = new Button({ ...data.submit, disabled: 'true', onClick: this.props.onSubmit });
 
     this.children = {
       ...this.children,
       SubmitButton,
-      InputUser
+      InputTitle
     };
   }
 
-  onSubmit(e: Event) {
-    e.preventDefault();
-    console.log('upload avatar');
+  onChange(e: Event) {
+    const target = e.target as HTMLFormElement;
+    
+    if (target.value.length > 0)
+      this.children['SubmitButton'].setProps({ disabled: 'false' });
+    else
+      this.children['SubmitButton'].setProps({ disabled: 'true' });
   }
 
   render(): string {
     return `
-      <div id="add-contact" popover class="modal text-center">,
+      <div id="add-chat" popover class="modal text-center {{#if isLoading}}loading{{/if}}">
         <form class="modal__form">
-          <h4 class="modal__title">Add new contact</h4>
-          {{{ InputUser }}}
+          <h4 class="modal__title">Add new chat</h4>
+          {{#if errorMessage}}
+          <small class="text-center text-error">{{{errorMessage}}}</small>
+          {{/if}}
+          {{{ InputTitle }}}
           {{{ SubmitButton }}}
         </form>
       </div>
@@ -48,4 +58,6 @@ class ModalAddContact extends Block {
   };
 };
 
-export default ModalAddContact;
+const mapStateToPropsShort = ({ isLoading, errorMessage }: { [key: string]: any }) => ({ isLoading, errorMessage });
+
+export default connect(mapStateToPropsShort)(ModalAddContact);

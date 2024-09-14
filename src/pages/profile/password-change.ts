@@ -4,15 +4,18 @@ import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { testPassword, testEmptyPassword } from '@/utils/validation';
 import { message } from '@/common/validationMessage';
+import { changePassword } from '@/services/user';
+import { UpdateUserPassword } from '@/api/types';
+import { connect } from '@/utils/connect';
 
 const data = {
   currentPwd: {
-    name: 'password',
+    name: 'oldPassword',
     type: 'password',
     autocomplete: 'current-password',
   },
   newPwd: {
-    name: 'newpassword',
+    name: 'newPassword',
     type: 'password',
     autocomplete: 'new-password',
   },
@@ -29,7 +32,7 @@ const data = {
   }
 };
 
-class Profile extends Block {
+export class Profile extends Block {
   init() {
     const onBackBind = this.onBack.bind(this);
     const onSubmitBind = this.onSubmit.bind(this);
@@ -54,7 +57,7 @@ class Profile extends Block {
   }
 
   onBack() {
-    console.log('going back');
+    window.router.back();
   }
 
   onRepeatNewPwd(e: Event) {
@@ -91,12 +94,13 @@ class Profile extends Block {
     const target = e.target as HTMLFormElement;
     const form = target!.form;
     const formData = new FormData(form);
-    const output: {[key: string]: FormDataEntryValue} = {};
 
-    formData.forEach((value, key) => {
-      output[key] = value;
-    });
-    console.log(output);
+    const output: UpdateUserPassword = {
+      oldPassword: formData.get('oldPassword') as string,
+      newPassword: formData.get('newPassword') as string
+    };
+
+    changePassword(output);
   }
 
   validateForm() {
@@ -127,8 +131,14 @@ class Profile extends Block {
       <div class="profile">
         {{{ BackBtn }}}
 
-        <div class="profile__content">
+        <div class="profile__content {{#if isLoading}}loading{{/if}}">
           <div class="profile__content_name">Changing password</div>
+          {{#if successMessage}}
+          <small class="text-center text-success">{{{successMessage}}}</small>
+          {{/if}}
+          {{#if errorMessage}}
+          <small class="text-center text-error">{{{errorMessage}}}</small>
+          {{/if}}
           <form class="profile__content_form">
             <div class="profile__content_form_row">
               <span class="profile__content_form_row_title">Current password</span>
@@ -154,4 +164,6 @@ class Profile extends Block {
   }
 };
 
-export default Profile;
+const mapStateToPropsShort = ({ isLoading, errorMessage, successMessage }: { [key: string]: any }) => ({ isLoading, errorMessage, successMessage });
+
+export default connect(mapStateToPropsShort)(Profile);

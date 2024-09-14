@@ -8,7 +8,8 @@ class Input extends Block {
       ...props,
       events: {
         // кастомное навешение события blur на внутренний элемент input
-        'blur|input': props.onBlur || (() => {})
+        'blur|input': props.onBlur || (() => {}),
+        'input|input': props.onInput || (() => {})
       }
     });
   };

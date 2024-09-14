@@ -1,4 +1,4 @@
-# Yandex.Practicum: Messanger
+# Yandex.Practicum: messenger
 
 # О проекте (ru)
 

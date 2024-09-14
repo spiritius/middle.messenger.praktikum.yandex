@@ -19,6 +19,11 @@
     outline: none;
   }
 
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
   &.text-error {
     color: var(--error);
   }

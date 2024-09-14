@@ -19,6 +19,7 @@ class Button extends Block {
         class="btn btn-{{ style }}"
         {{#if attributes}}{{{ attributes }}}{{/if}}
         {{#if id}}id="{{ id }}"{{/if}}
+        {{#if (eq disabled 'true') }}disabled{{/if}}
         >{{ title }}</button>
     `;
   };
