@@ -61,6 +61,11 @@ export type AddChat = {
   [key: string]: string
 }
 
+export type OpenChatData = {
+  chatid: string,
+  user: {[key: string]: string},
+}
+
 type LastMessage = {
   user: UserDTO,
   time: string,

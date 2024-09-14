@@ -5,11 +5,20 @@ class SidebarList extends Block {
     this.name = 'SidebarList';
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      const contacts = this.element?.querySelectorAll('.chat__contact');
+      contacts?.forEach(contact => {
+        contact.addEventListener('click', this.props.onClick);
+      });
+    }, 1000);
+  }
+
   render() {
     return `
       <div class="chat__sidebar_contactslist">
         {{#each list}}
-          <div class="chat__contact">
+          <div class="chat__contact" data-id="{{ id }}">
             <div class="chat__contact_avatar">
               {{#if img}}<img src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" alt="{{title}}" />{{/if}}
             </div>

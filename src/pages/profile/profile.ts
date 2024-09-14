@@ -76,7 +76,11 @@ const data = {
   }
 };
 
+// TODO
+// disable inputs after save data
+
 export class Profile extends Block {
+  store: any;
   init() {
     const onBackBind = this.onBack.bind(this);
     const onChangeAvatarBind = this.onChangeAvatar.bind(this);
@@ -117,9 +121,14 @@ export class Profile extends Block {
     };
 
     this.name = 'Profile';
+    this.store = window.store.getState();
   }
 
   beforeMount(): void {
+    this.getInfo();
+  }
+
+  getInfo() {
     userinfo()
       .then((response) => { 
         const fetchData = JSON.parse(response);
@@ -151,21 +160,30 @@ export class Profile extends Block {
   }
 
   onChangeData() {
-    this.children.InputEmail.setProps({ disabled: 'false' });
-    this.children.InputLogin.setProps({ disabled: 'false' });
-    this.children.InputFirstName.setProps({ disabled: 'false' });
-    this.children.InputLastName.setProps({ disabled: 'false' });
-    this.children.InputDisplayName.setProps({ disabled: 'false' });
-    this.children.InputPhone.setProps({ disabled: 'false' });
-
-    window.store.set({ changeUserData: true });
+    window.store.set({ profileDisabled: false });
+    
+    this.inputControls();
   }
 
   onCancel() {
     window.store.set({
       errorMessage: null,
-      changeUserData: false
+      profileDisabled: true
     });
+
+    this.inputControls();
+  }
+
+  inputControls() {
+    const state = window.store.getState();
+    console.log(state.profileDisabled);
+    
+    this.children.InputEmail.setProps({ disabled: state.profileDisabled.toString() });
+    this.children.InputLogin.setProps({ disabled: state.profileDisabled.toString() });
+    this.children.InputFirstName.setProps({ disabled: state.profileDisabled.toString() });
+    this.children.InputLastName.setProps({ disabled: state.profileDisabled.toString() });
+    this.children.InputDisplayName.setProps({ disabled: state.profileDisabled.toString() });
+    this.children.InputPhone.setProps({ disabled: state.profileDisabled.toString() });
   }
 
   onBack() {
@@ -204,7 +222,15 @@ export class Profile extends Block {
       output[key] = value.toString();
     });
 
-    update(output);
+    update(output)
+      .then(() => {
+        window.store.set({
+          errorMessage: null,
+          profileDisabled: true
+        });
+    
+        this.getInfo();
+      });
   }
 
   validateForm() {
@@ -274,14 +300,7 @@ export class Profile extends Block {
             </div>
           </form>
           <div class="profile__content_controls">
-          {{#if changeUserData}}
-            <div class="profile__content_controls_row">
-              {{{ SubmitButton }}}
-            </div>
-            <div class="profile__content_controls_row">
-              {{{ CancelButton }}}
-            </div>
-          {{else}}
+          {{#if profileDisabled}}
             <div class="profile__content_controls_row">
               {{{ ChangeButton }}}
             </div>
@@ -291,6 +310,13 @@ export class Profile extends Block {
             <div class="profile__content_controls_row">
               {{{ LogOutButton }}}
             </div>
+          {{else}}
+            <div class="profile__content_controls_row">
+              {{{ SubmitButton }}}
+            </div>
+            <div class="profile__content_controls_row">
+              {{{ CancelButton }}}
+            </div>
           {{/if}}
           </div>
         </div>
@@ -299,6 +325,6 @@ export class Profile extends Block {
   }
 };
 
-const mapStateToPropsShort = ({ isLoading, errorMessage, changeUserData, userName }: { [key: string]: any }) => ({ isLoading, errorMessage, changeUserData, userName });
+const mapStateToPropsShort = ({ isLoading, errorMessage, profileDisabled, userName }: { [key: string]: any }) => ({ isLoading, errorMessage, profileDisabled, userName });
 
 export default connect(mapStateToPropsShort)(Profile);

@@ -8,10 +8,10 @@ export const update = async (model: UpdateUserData) => {
   try {
     await userApi.update(model);
     window.store.set({ errorMessage: null });
-    window.store.set({ changeUserData: false }); 
+    window.store.set({ profileDisabled: false }); 
   } catch (error: any) {
     window.store.set({ errorMessage: error.reason });
-    window.store.set({ changeUserData: true }); 
+    window.store.set({ profileDisabled: true }); 
   } finally {
     window.store.set({ isLoading: false });
   }

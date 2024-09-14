@@ -18,6 +18,7 @@ export class UserApi extends BaseAPI {
       }
     });
   }
+
   async changePassword(data: UpdateUserPassword) {
     return this.userApiInstance.put('/password', {
       data,

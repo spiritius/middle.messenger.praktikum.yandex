@@ -56,10 +56,19 @@ export class Chat extends Block {
 
     this.name = 'Chat';
     this.chats = [];
+    this.state = window.store.getState();
+    this.props.currentChat = null;
   }
 
   beforeMount(): void {
     this.updateChatList();
+    
+    userinfo()
+      .then((response) => {
+        const data: UserDTO | any = response;
+        window.store.set({ userId: data.id });
+        this.state = window.store.getState();
+      });
   }
 
   addChat(e: Event) {
@@ -80,27 +89,29 @@ export class Chat extends Block {
   }
 
   updateChatList(): void {
-    console.log('--updateChatList');
-    
     getChats()
       .then((response) => {
-        if (typeof response === 'string') 
-          this.chats = JSON.parse(response);
-        else 
-          this.chats = response;
-  
-        if (Array.isArray(this.chats)) 
-          this.children['SidebarContactsList'].setProps({ list: this.chats });
-        
-      })
-      .catch((error) => {
-        console.error(error);
+        const data: any = response;
+        this.children.SidebarContactsList.setProps({ list: data });
+        this.chats = data;
       });
   }
 
   onChatClick(e: Event) {
+    e.stopPropagation();
     console.log(e);
     
+    const el = e.target as HTMLElement;
+    if (!el.dataset.id) return;
+    
+    const data = {
+      chatid: el.dataset.id,
+      user: {
+        id: this.state.userId
+      }
+    };
+    openChat(data);
+    this.props.currentChat = this.chats?.find((item: any) => item.id === +data.chatid);
   }
 
   render() {

@@ -37,11 +37,12 @@ window.router = router;
 window.store = new Store({
   isLoading: false,
   user: null,
-  changeUserData: false,
+  profileDisabled: true,
   errorMessage: null,
   successMessage: null,
   userName: null,
-  popoverIsOpen: false
+  userId: null,
+  chatId: null
 });
 
 router

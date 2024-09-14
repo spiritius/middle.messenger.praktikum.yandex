@@ -43,7 +43,7 @@ export const userinfo = async () => {
   window.store.set({ isLoading: true });
   try {
     const data = await authApi.userinfo();
-    return data.response;
+    return data;
   } catch (error: any) {
     window.store.set({ errorMessage: error.reason });
   } finally {

@@ -71,11 +71,16 @@ class HTTPTransport {
 
       xhr.timeout = timeout;
       xhr.onload = function () {
-        if (xhr.status >= 200 && xhr.status < 300) 
-          resolve(xhr);
+        if (this.status >= 200 && this.status < 300) 
+          if (this.getResponseHeader('content-type')?.startsWith('application/json')) {
+            const data = JSON.parse(this.response);
+            resolve(data);
+          }
+          else
+            resolve(this.response);
         else 
-          if (xhr.response)
-            reject(JSON.parse(xhr.response));
+          if (this.response)
+            reject(JSON.parse(this.response));
           else
             reject(new Error);
       };
@@ -95,10 +100,13 @@ class HTTPTransport {
       // Отправляем данные (если это не GET-запрос и данные есть)
       if (method === METHODS.GET || !data) 
         xhr.send();
-      else if (headers['Content-Type'] === 'application/json') 
-        xhr.send(JSON.stringify(data));
-      else 
+      else if (data instanceof FormData)
         xhr.send(data);
+      // else if (headers['Content-Type'] === 'application/json') 
+      //   xhr.send(JSON.stringify(data));
+      else 
+        xhr.send(JSON.stringify(data));
+        // xhr.send(data);
     });
   };
 }

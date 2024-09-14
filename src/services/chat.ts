@@ -27,3 +27,15 @@ export const addChat = async (model: AddChat) => {
     window.store.set({ isLoading: false });
   }
 };
+
+export const openChat = async (model: OpenChatData) => {
+  window.store.set({ isLoading: true });
+  try {
+    await chatApi.openChat(model);
+    window.store.set({ popoverIsOpen: '' });
+  } catch (error: any) {
+    window.store.set({ errorMessage: error.reason, popoverIsOpen: 'addchat' });
+  } finally {
+    window.store.set({ isLoading: false });
+  }
+};
