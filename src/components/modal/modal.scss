@@ -10,10 +10,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
+
   @media (min-width: 768px) {
     max-width: 400px;
   }
+
   @media (min-width: 992px) {
     transform: translate(calc(-50% + 40px), -50%);
     max-width: 400px;
@@ -34,14 +35,17 @@
     gap: 30px;
     width: 100%;
   }
+
   &__title {
     font-size: var(--text-lg);
   }
+
   &__buttons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
   }
+
   &__descr {
     font-size: var(--text-sm);
   }
@@ -53,5 +57,5 @@
 
 ::backdrop {
   background-color: var(--dark);
-  opacity: 0.3;
+  opacity: 30%;
 }

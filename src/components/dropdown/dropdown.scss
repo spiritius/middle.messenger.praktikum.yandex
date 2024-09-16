@@ -1,5 +1,5 @@
 .dropdown {
-  opacity: 0;
+  opacity: 0%;
   pointer-events: none;
   visibility: hidden;
   position: absolute;
@@ -14,21 +14,24 @@
     top: 0;
     right: 0;
   }
+
   &--top-left {
     top: 0;
     left: 0;
   }
+
   &--bottom-right {
     bottom: 0;
     right: 0;
   }
+
   &--bottom-left {
     bottom: 0;
     left: 0;
   }
 
   &.visible {
-    opacity: 1;
+    opacity: 100%;
     pointer-events: unset;
     visibility: visible;
   }
@@ -36,7 +39,7 @@
   &__list {
     list-style: none;
     margin: 0;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -54,7 +57,6 @@
     text-align: left;
     white-space: nowrap;
     color: var(--dark);
-    background: var(--white);
     padding: 0.75rem 1.5rem;
     background: none;
     border: none;
@@ -63,15 +65,16 @@
     border-radius: var(--radius-none);
 
     &.accent-error {
-      color: var(--error)
+      color: var(--error);
     }
+
     &:hover,
     &:focus {
       background: var(--dark-10);
     }
 
     .icon {
-      width: 16px; 
+      width: 16px;
       height: 16px;
       pointer-events: none;
     }

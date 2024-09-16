@@ -34,9 +34,10 @@
         .dropdown {
           top: calc(100% - 5px);
         }
+
         &:hover {
           .dropdown {
-            opacity: 1;
+            opacity: 100%;
             pointer-events: unset;
             visibility: visible;
           }
@@ -45,14 +46,16 @@
 
       &_search {
         position: relative;
-  
+
         .input__wrapper {
           margin: 0;
           padding: 0;
         }
+
         .input__control {
           padding-right: 55px;
         }
+
         .btn {
           position: absolute;
           top: 0;
@@ -88,6 +91,7 @@
           color: var(--primary);
         }
       }
+
       &-adduser {
         cursor: pointer;
         transition: var(--trs);
@@ -130,7 +134,6 @@
       background-color: var(--primary-10);
 
       &-avatar {
-        display: block;
         border-radius: var(--radius-full);
         background: var(--accent);
         overflow: hidden;
@@ -149,18 +152,21 @@
           border-radius: var(--radius-full);
         }
       }
+
       &-name {
         font-weight: 600;
       }
+
       &-settings {
         position: relative;
 
         .dropdown {
           top: calc(100% - 5px);
         }
+
         &:hover {
           .dropdown {
-            opacity: 1;
+            opacity: 100%;
             pointer-events: unset;
             visibility: visible;
           }
@@ -172,11 +178,13 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+
       // flex-direction: column-reverse;
+
       // justify-content: flex-start;
       gap: 5px;
       min-height: 100%;
-      
+
       &-wrapper {
         overflow: auto;
         font-size: var(--text-sm);
@@ -185,7 +193,7 @@
         background-image: url("/texture.png");
         background-repeat: repeat;
       }
-      
+
       &_timedelimeter {
         width: 100%;
         display: grid;
@@ -197,9 +205,9 @@
         font-size: var(--text-sm);
         margin: 1rem 0;
 
-        &:before,
-        &:after {
-          content: '';
+        &::before,
+        &::after {
+          content: "";
           display: block;
           height: 1px;
           background: var(--primary-40);
@@ -220,14 +228,16 @@
         .dropdown {
           bottom: calc(100% - 5px);
         }
+
         &:hover {
           .dropdown {
-            opacity: 1;
+            opacity: 100%;
             pointer-events: unset;
             visibility: visible;
           }
         }
       }
+
       &_text {
         width: 100%;
 
@@ -239,7 +249,7 @@
           width: 100%;
           height: 100%;
           outline: none !important;
-          padding: .8rem 0 0;
+          padding: 0.8rem 0 0;
         }
       }
     }

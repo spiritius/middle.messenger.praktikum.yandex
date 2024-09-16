@@ -11,7 +11,7 @@
   &:hover,
   &:focus {
     .profile__content_avatar_control {
-      opacity: 1;
+      opacity: 100%;
     }
   }
 
@@ -36,7 +36,7 @@
     border: none;
     font-size: var(--text-sm);
     padding: 1rem;
-    opacity: 0;
+    opacity: 0%;
     transition: var(--trs);
     position: absolute;
     top: 0;
