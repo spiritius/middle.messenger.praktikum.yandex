@@ -7,6 +7,7 @@ class ProfileAvatar extends Block {
 
     this.children = {
       ...this.children,
+      //@ts-expect-error wft
       Modal
     };
   }

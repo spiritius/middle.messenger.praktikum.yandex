@@ -5,7 +5,7 @@ import { testLength, testEmptyPassword } from '@/utils/validation';
 import { message } from '@/common/validationMessage';
 import { connect } from '@/utils/connect';
 import { LoginRequestData } from '@/api/types';
-import { login, logout } from '@/services/auth';
+import { login } from '@/services/auth';
 
 const data = {
   login: {

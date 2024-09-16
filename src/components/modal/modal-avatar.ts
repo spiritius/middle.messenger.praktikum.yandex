@@ -1,5 +1,4 @@
 import Block from '@/core/block';
-import { Button } from '@/components/button';
 import { FileInput } from '@/components/file';
 import { uploadAvatar } from '@/services/user';
 import { connect } from '@/utils/connect';
@@ -10,7 +9,7 @@ export class ModalAvatar extends Block {
     const onChangeBind = this.onChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
 
-    this.element?.addEventListener('click', this.handleClick);
+    document.addEventListener('click', this.handleClick);
 
     const UploadFile = new FileInput({ name: 'avatar', label: 'Choose a file on your computer', onChange: onChangeBind });
 
@@ -63,7 +62,7 @@ export class ModalAvatar extends Block {
     console.log('submit');
 
     const form = this.element?.querySelector('form') as HTMLFormElement;
-    const fileInput = form?.querySelector('input[name="avatar"]') as HTMLInputElement;
+    const fileInput = form?.querySelector('input[name="avatar"]') as any;
 
     const formData = new FormData(form);
     formData.append('avatar', fileInput);

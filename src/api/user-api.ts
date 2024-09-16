@@ -1,6 +1,6 @@
 import HTTP from '@/core/httpTransport';
 import { BaseAPI } from './base-api';
-import { UpdateUserData, UpdateUserPassword } from './types';
+import { SearchUser, UpdateUserData, UpdateUserPassword } from './types';
 
 export class UserApi extends BaseAPI {
   private userApiInstance: HTTP;
@@ -20,7 +20,16 @@ export class UserApi extends BaseAPI {
   }
 
   async changePassword(data: UpdateUserPassword) {
-    return this.userApiInstance.put('/password', {
+    return this.userApiInstance.post('/password', {
+      data,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
+  async searchUser(data: SearchUser) {
+    return this.userApiInstance.post('/search', {
       data,
       headers: {
         'Content-Type': 'application/json'

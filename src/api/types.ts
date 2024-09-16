@@ -79,3 +79,37 @@ export type ChatDTO = {
   unread_count: number,
   last_message: LastMessage | null
 }
+
+export type AddUserToChat = {
+  users: number[],
+  chatId: number
+}
+
+export type ChatMessage = {
+  id: number,
+  user_id: number | string,
+  chat_id: number,
+  type: string,
+  time: string,
+  content: string,
+  is_read: true,
+  file: null
+}
+
+export type SearchUser = {
+  login: string
+}
+
+export type ChatUser = {
+  id: 123,
+  first_name: string,
+  second_name: string,
+  display_name: string,
+  login: string,
+  avatar: string,
+  role: string,
+}
+
+export type ChatId = {
+  chatId: number
+}

@@ -169,15 +169,22 @@
     }
 
     &_body {
-      overflow: auto;
       display: flex;
-      flex-direction: column-reverse;
+      flex-direction: column;
+      justify-content: flex-end;
+      // flex-direction: column-reverse;
+      // justify-content: flex-start;
       gap: 5px;
-      font-size: var(--text-sm);
-      padding: 1rem 1.5rem 1rem 1rem;
-      background-color: var(--primary-30);
-      background-image: url("/texture.png");
-      background-repeat: repeat;
+      min-height: 100%;
+      
+      &-wrapper {
+        overflow: auto;
+        font-size: var(--text-sm);
+        padding: 1rem 1.5rem 1rem 1rem;
+        background-color: var(--primary-30);
+        background-image: url("/texture.png");
+        background-repeat: repeat;
+      }
       
       &_timedelimeter {
         width: 100%;
@@ -204,7 +211,7 @@
       padding: 1rem;
       background: var(--white);
       display: grid;
-      grid-template-columns: 40px 1fr 40px;
+      grid-template-columns: 1fr 40px;
       grid-gap: 15px;
 
       &_attach {

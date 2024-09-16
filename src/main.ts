@@ -42,7 +42,7 @@ window.store = new Store({
   successMessage: null,
   userName: null,
   userId: null,
-  chatId: null
+  chatId: null,
 });
 
 router

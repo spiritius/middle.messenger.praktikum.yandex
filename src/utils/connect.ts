@@ -1,10 +1,6 @@
 import { StoreEvents } from '@/core/store';
 import isEqual from './isEqual';
 
-// interface DispatchHandlers {
-//   [key: string]: (...args: any[]) => void;
-// }
-
 export function connect(mapStateToProps: (arg0: any) => any) {
   return function(Component: any) {
     return class extends Component{
@@ -15,16 +11,6 @@ export function connect(mapStateToProps: (arg0: any) => any) {
         let state = mapStateToProps(store.getState());
   
         super({ ...props, ...state });
-
-        // const dispatchHandlers: DispatchHandlers = {};
-        // Object.entries(dispatch || {}).forEach(([key, handler]) => {
-        //   if (typeof handler === 'function') 
-        //     dispatchHandlers[key] = (...args: any) => handler(window.store.set.bind(window.store), ...args);
-          
-        //   // dispatchhandler[key] = (...args: any) => handler(window.store.set.bind(window.store), ...args);
-        // });
-
-        // this.setProps({ ...dispatchHandlers });
 
         this.onChangeStoreCallback = () => {
 

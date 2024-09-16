@@ -58,7 +58,9 @@
     padding: 0.75rem 1.5rem;
     background: none;
     border: none;
+    gap: 0;
     cursor: pointer;
+    border-radius: var(--radius-none);
 
     &.accent-error {
       color: var(--error)

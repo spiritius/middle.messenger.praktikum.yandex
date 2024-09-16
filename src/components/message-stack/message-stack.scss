@@ -6,15 +6,16 @@
   display: flex;
   flex-direction: column;
   gap: .25rem;
+  margin-right: auto;
+  background: var(--dark-5);
+  border-bottom-left-radius: var(--radius-none);
+  min-width: 220px;
   
-  &-contact {
-    margin-right: auto;
-    background: var(--dark-5);
-    border-bottom-left-radius: var(--radius-none);
-  }
-  &-user {
+  &.user {
     background: var(--primary-20);
     margin-left: auto;
+    margin-right: 0;
+    border-bottom-left-radius: var(--radius);
     border-bottom-right-radius: var(--radius-none);
   }
 

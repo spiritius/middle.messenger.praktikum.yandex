@@ -12,13 +12,14 @@
 
 ## Текущая версия
 
-Функционал реализован в рамках Спринта 2.
+Функционал реализован в рамках Спринта 3.
 
-- добавлены eslint и stylelint, обновлены их конфиги, их автозапуск добавлен в дев-мод
-- реализована работа на классах Block и EventBus
-- все скрипты переписаны на TS
-- добавлена валидация форм и сбор данных в консоль
-- добавлена реализация fetch по примеру из практики
+- реализован router на основе практических занятий
+- возможен переход по страницам и истории браузера
+- добавлены api для чатов, авторизации и пользователей на основе практических занятий
+- реализованы регистрация и логин пользавателя мессенджера
+- реализована работа с чатами: добавление чата, добавление пользователя в чат, удаление пользователя из чата, удаление чата
+- реализована отправка и прием сообщений при помощи websocket.
 
 ## Установка
 
@@ -52,13 +53,14 @@ Project language: English
 
 ## Current Version
 
-Functionality implemented within Sprint 2.
+The functionality was implemented as part of Sprint 3.
 
-	- Added ESLint and Stylelint, updated their configurations, and integrated auto-run in dev mode.
-	- Implemented functionality using the Block and EventBus classes.
-	- All scripts were rewritten in TypeScript.
-	- Added form validation and logging of data to the console.
-	- Implemented fetch based on the practice example.
+- Implemented router based on practical lessons
+- Navigation between pages and browser history is enabled
+- Added APIs for chats, authentication, and users based on practical lessons
+- Implemented user registration and login for the messenger
+- Implemented chat functionality: adding a chat, adding a user to a chat, removing a user from a chat, and deleting a chat
+- Implemented sending and receiving messages via WebSocket.
 
 ## Installation
 

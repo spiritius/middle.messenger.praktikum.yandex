@@ -1,55 +1,50 @@
 import Block from '@/core/block';
 import { logout } from '@/services/auth';
+import { Button } from '@/components/button';
 
 class DropdownSettings extends Block {
   init() {
     this.name = 'DropdownSettings';
 
-    this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.handleProfileClick = this.handleProfileClick.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    const profileClickBind = this.profileClick.bind(this);
+    const addChatClickBind = this.addChatClick.bind(this);
+    const logoutBind = this.onLogout.bind(this);
 
-    document.addEventListener('click', this.handleClick);
+    const ButtonProfile = new Button({ title: 'Profile', icon: 'user', class: 'dropdown__btn', onClick: profileClickBind });
+    const ButtonAddChat = new Button({ title: 'Add chat', icon: 'add', class: 'dropdown__btn', onClick: addChatClickBind });
+    const ButtonLogout = new Button({ title: 'Logout', icon: 'exit', class: 'dropdown__btn accent-error', onClick: logoutBind });
+
+    this.children = {
+      ...this.children,
+      ButtonProfile,
+      ButtonAddChat,
+      ButtonLogout
+    };
   }
 
-  handleLogoutClick() {
-    logout();
+  addChatClick() {
+    const popover = document.querySelector('#add-chat') as HTMLDialogElement;
+    popover.showPopover();
   }
-
-  handleProfileClick() {
+  profileClick() {
     window.router.go('/settings');
   }
-
-  handleClick(e: MouseEvent) {
-    const target = e.target as HTMLElement;
-
-    if (target.id === 'logout') 
-      this.handleLogoutClick();
-    if (target.id === 'profile') 
-      this.handleProfileClick();
+  onLogout() {
+    logout();
   }
 
   render() {
     return `
-      <div class="dropdown dropdown--top-left">
+      <div class="dropdown dropdown--top-left" id="dropdown-settings">
         <ul class="dropdown__list">
           <li class="dropdown__item">
-            <button class="dropdown__btn" type="button" id="profile">
-              <span class="icon icon-user"></span>
-              Profile
-            </button>
+            {{{ ButtonProfile }}}
           </li>
           <li class="dropdown__item">
-            <button class="dropdown__btn" type="button" popovertarget="add-chat" popovertargetaction="show">
-              <span class="icon icon-add"></span>
-              Add chat
-            </button>
+            {{{ ButtonAddChat }}}
           </li>
           <li class="dropdown__item">
-            <button class="dropdown__btn accent-error" type="button" id="logout">
-              <span class="icon icon-exit"></span>
-              Log out
-            </button>
+            {{{ ButtonLogout }}}
           </li>
         </ul>
       </div>

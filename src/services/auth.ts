@@ -8,6 +8,7 @@ export const login = async (model: LoginRequestData) => {
   try {
     await authApi.login(model);
     window.router.go('/messenger');
+    window.store.set({ errorMessage: null });
   } catch (error: any) {
     window.store.set({ errorMessage: error.reason });
   } finally {
@@ -20,6 +21,7 @@ export const signup = async (model: SignUpRequestData) => {
   try {
     await authApi.signup(model);
     window.router.go('/messenger');
+    window.store.set({ errorMessage: null });
   } catch (error: any) {
     window.store.set({ errorMessage: error.reason });
   } finally {
@@ -32,6 +34,7 @@ export const logout = async () => {
   try {
     await authApi.logout();
     window.router.go('/');
+    window.store.set({ errorMessage: null });
   } catch (error: any) {
     window.store.set({ errorMessage: error.reason });
   } finally {
@@ -43,6 +46,7 @@ export const userinfo = async () => {
   window.store.set({ isLoading: true });
   try {
     const data = await authApi.userinfo();
+    window.store.set({ errorMessage: null });
     return data;
   } catch (error: any) {
     window.store.set({ errorMessage: error.reason });

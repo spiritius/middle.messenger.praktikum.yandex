@@ -3,7 +3,7 @@ import Route from '@/core/route';
 export interface IRoute {
   navigate: (pathname: string) => void,
   match: (pathname: string) => boolean,
-  route: () => void,
+  route?: () => void,
   render: () =>  void
 }
 

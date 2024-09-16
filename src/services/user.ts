@@ -1,5 +1,5 @@
 import { UserApi } from '@/api/user-api';
-import { UpdateUserData, UpdateUserPassword } from '@/api/types';
+import { SearchUser, UpdateUserData, UpdateUserPassword } from '@/api/types';
 
 const userApi = new UserApi();
 
@@ -31,6 +31,17 @@ export const changePassword = async (model: UpdateUserPassword) => {
   }
 };
 
+export const searchUser = async (model: SearchUser) => {
+  window.store.set({ isLoading: true });
+  try {
+    return await userApi.searchUser(model);
+  } catch (error: any) {
+    window.store.set({ errorMessage: error.reason });
+  } finally {
+    window.store.set({ isLoading: false });
+  }
+};
+
 export const uploadAvatar = async (model: FormData) => {
   window.store.set({ isLoading: true });
   try {
@@ -42,3 +53,4 @@ export const uploadAvatar = async (model: FormData) => {
     window.store.set({ isLoading: false });
   }
 };
+

@@ -67,6 +67,14 @@ body {
   min-height: 100dvh;
 }
 
+ul {
+  list-style-position: inside;
+}
+
+.delete {
+  cursor: pointer;
+}
+
 .form {
   width: 90%;
   max-width: 400px;

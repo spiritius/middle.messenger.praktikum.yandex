@@ -5,15 +5,6 @@ class SidebarList extends Block {
     this.name = 'SidebarList';
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      const contacts = this.element?.querySelectorAll('.chat__contact');
-      contacts?.forEach(contact => {
-        contact.addEventListener('click', this.props.onClick);
-      });
-    }, 1000);
-  }
-
   render() {
     return `
       <div class="chat__sidebar_contactslist">

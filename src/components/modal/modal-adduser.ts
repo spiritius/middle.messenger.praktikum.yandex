@@ -6,18 +6,18 @@ import { connect } from '@/utils/connect';
 const data = {
   input: {
     type: 'text',
-    label: 'Title',
-    name: 'title',
+    label: 'Nickname',
+    name: 'chat-add-user',
     style: 'text-left',
   },
   submit: {
     style: 'primary',
     type: 'button',
-    title: 'Add',
+    title: 'Add user',
   }
 };
 
-export class ModalAddContact extends Block {
+export class ModalAddUser extends Block {
   init() {
     const onChangeBind = this.onChange.bind(this);
 
@@ -42,9 +42,9 @@ export class ModalAddContact extends Block {
 
   render(): string {
     return `
-      <div id="add-chat" popover class="modal text-center {{#if isLoading}}loading{{/if}}">
+      <div id="add-user" popover class="modal text-center {{#if isLoading}}loading{{/if}}">
         <form class="modal__form">
-          <h4 class="modal__title">Add new chat</h4>
+          <h4 class="modal__title">Add new user to chat</h4>
           {{#if errorMessage}}
           <small class="text-center text-error">{{{errorMessage}}}</small>
           {{/if}}
@@ -58,4 +58,4 @@ export class ModalAddContact extends Block {
 
 const mapStateToPropsShort = ({ isLoading, errorMessage }: { [key: string]: any }) => ({ isLoading, errorMessage });
 
-export default connect(mapStateToPropsShort)(ModalAddContact);
+export default connect(mapStateToPropsShort)(ModalAddUser);

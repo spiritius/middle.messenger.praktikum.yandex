@@ -76,9 +76,6 @@ const data = {
   }
 };
 
-// TODO
-// disable inputs after save data
-
 export class Profile extends Block {
   store: any;
   init() {
@@ -131,7 +128,7 @@ export class Profile extends Block {
   getInfo() {
     userinfo()
       .then((response) => { 
-        const fetchData = JSON.parse(response);
+        const fetchData: any = response;
         if (fetchData) 
           Object.keys(fetchData).forEach((key) => {
             if (key in data) {
@@ -176,7 +173,6 @@ export class Profile extends Block {
 
   inputControls() {
     const state = window.store.getState();
-    console.log(state.profileDisabled);
     
     this.children.InputEmail.setProps({ disabled: state.profileDisabled.toString() });
     this.children.InputLogin.setProps({ disabled: state.profileDisabled.toString() });
