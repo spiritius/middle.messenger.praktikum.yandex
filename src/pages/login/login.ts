@@ -13,7 +13,7 @@ const data = {
     type: 'text', 
     name: 'login', 
     required: 'true',
-    value: 'icquser2'
+    value: ''
   },
   password: {
     label: 'Password', 
@@ -21,7 +21,7 @@ const data = {
     name: 'password', 
     required: 'true', 
     autocomplete: 'off',
-    value: '1234qwerA'
+    value: ''
   },
   submit: {
     title: 'Log in', 

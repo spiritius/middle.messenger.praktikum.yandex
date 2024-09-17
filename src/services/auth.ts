@@ -10,6 +10,10 @@ export const login = async (model: LoginRequestData) => {
     window.router.go('/messenger');
     window.store.set({ errorMessage: null });
   } catch (error: any) {
+    if (error.reason === 'User already in system') {
+      window.router.go('/messenger');
+      return;
+    }
     window.store.set({ errorMessage: error.reason });
   } finally {
     window.store.set({ isLoading: false });

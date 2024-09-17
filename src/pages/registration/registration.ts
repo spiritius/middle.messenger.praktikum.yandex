@@ -13,35 +13,35 @@ const data = {
     type: 'email',
     name: 'email',
     required: 'true',
-    value: 'icquser2@mail.ru'
+    value: ''
   },
   login: {
     label: 'Login',
     type: 'text',
     name: 'login',
     required: 'true',
-    value: 'icquser2'
+    value: ''
   },
   first_name: {
     label: 'First name',
     type: 'text',
     name: 'first_name',
     required: 'false',
-    value: 'Rom'
+    value: ''
   },
   last_name: {
     label: 'Last name',
     type: 'text',
     name: 'second_name',
     required: 'false',
-    value: 'Burning'
+    value: ''
   },
   phone: {
     label: 'Phone',
     type: 'tel',
     name: 'phone',
     required: 'false',
-    value: '+799901234567'
+    value: ''
   },
   password: {
     label: 'Password',
@@ -50,7 +50,7 @@ const data = {
     minlength: '8',
     required: 'true',
     autocomplete: 'off',
-    value: '1234qwerA'
+    value: ''
   },
   repeatPassword: {
     label: 'Repeat password',
@@ -59,7 +59,7 @@ const data = {
     minlength: '8',
     required: 'true',
     autocomplete: 'off',
-    value: '1234qwerA'
+    value: ''
   },
   createBtn: {
     title: 'Create account',
