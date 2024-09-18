@@ -1,0 +1,12 @@
+# netlify.toml
+[[redirects]]
+  from = "/settings"
+  to = "/settings"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/messenger"
+  to = "/messenger"
+  status = 301
+  force = true
