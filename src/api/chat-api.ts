@@ -24,6 +24,11 @@ export class ChatApi extends BaseAPI {
       }
     });
   }
+  async updateChatAvatar(data: FormData) {
+    return this.chatApiInstance.put('/avatar', {
+      data
+    });
+  }
   async getChatUsers(chat_id: number) {
     return this.chatApiInstance.get(`/${chat_id}/users`);
   }
@@ -110,7 +115,13 @@ export class ChatApi extends BaseAPI {
     this.socket.onmessage = (event) => {
       // console.log('Получены данные', event.data);
       console.log('Получены данные');
-      const messages = JSON.parse(event.data);
+      let messages: unknown;
+      try {
+        messages = JSON.parse(event.data);
+      } catch (error) {
+        console.log(error);
+        
+      }
       handleMessage(messages, undefined, callback);
     };
 

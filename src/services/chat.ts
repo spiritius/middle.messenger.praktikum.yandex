@@ -22,9 +22,18 @@ export const addChat = async (model: AddChat) => {
     await chatApi.addChat(model);
     window.store.set({ popoverIsOpen: '' });
   } catch (error: any) {
-    window.store.set({ errorMessage: error.reason, popoverIsOpen: 'addchat' });
+    window.store.set({ errorMessage: error.reason });
   } finally {
     window.store.set({ isLoading: false });
+  }
+};
+
+export const updateChatAvatar = async (model: FormData) => {
+  try {
+    return await chatApi.updateChatAvatar(model);
+  } catch (error: any) {
+    console.log(error);
+    window.store.set({ errorMessage: error.reason });
   }
 };
 

@@ -4,7 +4,7 @@ import { Input } from '@/components/input';
 import { Dropdown, DropdownSettings, DropdownChatOptions } from '@/components/dropdown';
 import { SidebarList } from '@/components/sidebar-list';
 import { MessageStack } from '@/components/message-stack';
-import { ModalAddContact, ModalAddUser, ModalAddUserList, ModalRemoveContact, ModalUserList } from '@/components/modal';
+import { ModalAddContact, ModalAddUser, ModalAddUserList, ModalChatAvatar, ModalRemoveContact, ModalUserList } from '@/components/modal';
 import { addChat, addUser, closeChat, deleteChat, deleteUser, getChatUsers, getChats, openChat } from '@/services/chat';
 import { connect } from '@/utils/connect';
 import { AddChat, UserDTO, ChatDTO, ChatMessage, AddUserToChat, SearchUser, ChatUser, ChatId } from '@/api/types';
@@ -36,6 +36,7 @@ export class Chat extends Block {
     const modalAddUser = new ModalAddUser({ onSubmit: onAddUserToChatBind });
     const modalChatUserList = new ModalUserList({ list: [] });
     const modalSearchUserList = new ModalAddUserList({ list: [] });
+    const modalChatUpdateAvatar = new ModalChatAvatar({ list: [] });
 
     const HeaderOptionBtn = new Button({ type: 'button', style: 'icon icon-options', title: '' });
     const HeaderOptionDropdown = new DropdownSettings();
@@ -60,6 +61,7 @@ export class Chat extends Block {
       modalContactAdd,
       modalContactRemove,
       modalSearchUserList,
+      modalChatUpdateAvatar,
       //@ts-expect-error wft
       modalAddUser,
       modalChatUserList,
@@ -339,6 +341,7 @@ export class Chat extends Block {
       {{{ modalAddUser }}}
       {{{ modalChatUserList }}}
       {{{ modalSearchUserList }}}
+      {{{ modalChatUpdateAvatar }}}
     </div>
     `;
   }

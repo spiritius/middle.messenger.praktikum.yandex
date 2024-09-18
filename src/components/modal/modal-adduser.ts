@@ -43,7 +43,7 @@ export class ModalAddUser extends Block {
   render(): string {
     return `
       <div id="add-user" popover class="modal text-center {{#if isLoading}}loading{{/if}}">
-        <form class="modal__form">
+        <form class="modal__form" onkeydown="return event.key != 'Enter';">
           <h4 class="modal__title">Add new user to chat</h4>
           {{#if errorMessage}}
           <small class="text-center text-error">{{{errorMessage}}}</small>

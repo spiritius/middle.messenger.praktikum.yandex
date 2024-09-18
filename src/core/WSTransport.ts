@@ -37,7 +37,12 @@ class WSTransport {
   }
 
   private onMessage(event: MessageEvent): void {
-    const data = JSON.parse(event.data);
+    let data;
+    try {
+      data = JSON.parse(event.data);
+    } catch (error) {
+      console.log(error);
+    }
     console.log('Received WebSocket message:', data);
     this.handleMessage(data);
   }
