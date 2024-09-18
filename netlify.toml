@@ -1,12 +1,8 @@
-# netlify.toml
-[[redirects]]
-  from = "/settings"
-  to = "/settings"
-  status = 301
-  force = true
+[build]
+  publish = "dist"
 
 [[redirects]]
-  from = "/messenger"
-  to = "/messenger"
-  status = 301
+  from = "/*"
+  to = "/index.html"
+  status = 200
   force = true
