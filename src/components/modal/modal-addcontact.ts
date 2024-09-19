@@ -43,7 +43,7 @@ export class ModalAddContact extends Block {
   render(): string {
     return `
       <div id="add-chat" popover class="modal text-center {{#if isLoading}}loading{{/if}}">
-        <form class="modal__form">
+        <form class="modal__form" onkeydown="return event.key != 'Enter';">
           <h4 class="modal__title">Add new chat</h4>
           {{#if errorMessage}}
           <small class="text-center text-error">{{{errorMessage}}}</small>
