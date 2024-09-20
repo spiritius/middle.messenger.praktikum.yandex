@@ -1,26 +1,27 @@
 .message {
   max-width: 80%;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: var(--radius);
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: .25rem;
-  
-  &-contact {
-    margin-right: auto;
-    background: var(--dark-5);
-    border-bottom-left-radius: var(--radius-none);
-  }
-  &-user {
+  gap: 0.25rem;
+  margin-right: auto;
+  background: var(--dark-5);
+  border-bottom-left-radius: var(--radius-none);
+  min-width: 220px;
+
+  &.user {
     background: var(--primary-20);
     margin-left: auto;
+    margin-right: 0;
+    border-bottom-left-radius: var(--radius);
     border-bottom-right-radius: var(--radius-none);
   }
 
   &__date {
     text-align: right;
-    opacity: 0.8;
+    opacity: 80%;
     color: var(--dark-30);
     display: inline-block;
     font-size: var(--text-xs);

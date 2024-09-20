@@ -3,20 +3,25 @@ import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { testLength, testEmptyPassword } from '@/utils/validation';
 import { message } from '@/common/validationMessage';
+import { connect } from '@/utils/connect';
+import { LoginRequestData } from '@/api/types';
+import { login } from '@/services/auth';
 
 const data = {
   login: {
     label: 'Login', 
     type: 'text', 
     name: 'login', 
-    required: 'true'
+    required: 'true',
+    value: ''
   },
   password: {
     label: 'Password', 
     type: 'password', 
     name: 'password', 
     required: 'true', 
-    autocomplete: 'off'
+    autocomplete: 'off',
+    value: ''
   },
   submit: {
     title: 'Log in', 
@@ -27,17 +32,23 @@ const data = {
     title: 'Create account', 
     type: 'button', 
     style: 'link'
+  },
+  logout: {
+    title: 'Log Out', 
+    type: 'button', 
+    style: 'link'
   }
 };
 
-class Login extends Block {
+export class Login extends Block {
   init() {
     const onSubmitBind = this.onSubmit.bind(this);
+    const onCreateAccountBind = this.onCreateAccount.bind(this);
 
     const InputLogin = new Input({ ...data.login, onBlur: (e: Event) => this.handleInputChange(e, 'InputLogin', testLength, message.login) });
     const InputPassword = new Input({ ...data.password, onBlur: (e: Event) => this.handleInputChange(e, 'InputPassword', testEmptyPassword, message.password) });
     const SubmitButton = new Button({ ...data.submit, onClick: onSubmitBind });
-    const CreateAccountButton = new Button(data.create);
+    const CreateAccountButton = new Button({ ...data.create, onClick: onCreateAccountBind });
 
     this.children = {
       ...this.children,
@@ -60,13 +71,13 @@ class Login extends Block {
     const target = e.target as HTMLFormElement;
     const form = target!.form;
     const formData = new FormData(form);
-    const output: {[key: string]: FormDataEntryValue} = {};
+    const output: LoginRequestData = {} as LoginRequestData;
 
     formData.forEach((value, key) => {
-      output[key] = value;
+      output[key] = value.toString();
     });
-    
-    console.log(output);
+
+    login(output);
   }
 
   handleInputChange(e: Event, name: string, validator: (value: string) => boolean, errorText: string) {
@@ -103,10 +114,17 @@ class Login extends Block {
     return isValid;
   }
 
+  onCreateAccount() {
+    window.router.go('/sign-up');
+  }
+
   render() {
     return `
-        <form class="form">
+        <form class="form {{#if isLoading}}loading{{/if}}">
           <h1 class="form__title">Enter</h1>
+          {{#if errorMessage}}
+          <small class="text-center text-error">{{{errorMessage}}}</small>
+          {{/if}}
           {{{ InputLogin }}}
           {{{ InputPassword }}}
           <div class="form__buttons">
@@ -118,4 +136,6 @@ class Login extends Block {
   }
 };
 
-export default Login;
+const mapStateToPropsShort = ({ isLoading, errorMessage }: { [key: string]: any }) => ({ isLoading, errorMessage });
+
+export default connect(mapStateToPropsShort)(Login);

@@ -5,44 +5,45 @@ import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { testLogin, testEmail, testName, testPhone } from '@/utils/validation';
 import { message } from '@/common/validationMessage';
+import { logout, userinfo } from '@/services/auth';
+import { connect } from '@/utils/connect';
+import { UpdateUserData } from '@/api/types';
+import { update } from '@/services/user';
 
 const data = {
+  avatar: {
+    path: null
+  },
   email: {
     name: 'email',
     type: 'email',
-    value: 'evan@domain.com',
     disabled: 'true',
     autocomplete: 'on',
   },
   login: {
     name: 'login',
     type: 'text',
-    value: 'Evan99',
     disabled: 'true',
   },
   first_name: {
     name: 'first_name',
     type: 'text',
-    value: 'Evan',
     disabled: 'true',
     autocomplete: 'on',
   },
-  last_name: {
+  second_name: {
     name: 'second_name',
     type: 'text',
-    value: 'Jones',
     disabled: 'true',
   },
   display_name: {
     name: 'display_name',
     type: 'text',
-    value: 'Evan',
     disabled: 'true',
   },
   phone: {
     name: 'phone',
     type: 'tel',
-    value: '+79099673030',
     disabled: 'true',
     autocomplete: 'on',
   },
@@ -63,24 +64,41 @@ const data = {
     style: 'link text-error',
     title: 'Log out',
   },
+  submit: {
+    type: 'submit',
+    style: 'primary',
+    title: 'Save changes',
+  },
+  cancel: {
+    type: 'button',
+    style: 'link',
+    title: 'Discard changes',
+  }
 };
 
-class Profile extends Block {
+export class Profile extends Block {
+  store: any;
   init() {
     const onBackBind = this.onBack.bind(this);
     const onChangeAvatarBind = this.onChangeAvatar.bind(this);
+    const onChangePasswordBind = this.onChangePassword.bind(this);
+    const onChangeDataBind = this.onChangeData.bind(this);
+    const onSubmitBind = this.onSubmit.bind(this);
+    const onCancelBind = this.onCancel.bind(this);
 
     const BackBtn = new ProfileBack({ onClick: onBackBind });
-    const Avatar = new ProfileAvatar({ onClick: onChangeAvatarBind });
+    const Avatar = new ProfileAvatar({ ...data.avatar, onClick: onChangeAvatarBind });
     const InputEmail = new Input({ ...data.email, onBlur: (e: Event) => this.handleInputChange(e, 'InputEmail', testEmail, message.email) });
     const InputLogin = new Input({ ...data.login, onBlur: (e: Event) => this.handleInputChange(e, 'InputLogin', testLogin, message.loginReg) });
     const InputFirstName = new Input({ ...data.first_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputFirstName', testName, message.firstName) });
-    const InputLastName = new Input({ ...data.last_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputLastName', testName, message.lastName) });
+    const InputLastName = new Input({ ...data.second_name, onBlur: (e: Event) => this.handleInputChange(e, 'InputLastName', testName, message.lastName) });
     const InputDisplayName = new Input({ ...data.display_name });
     const InputPhone = new Input({ ...data.phone, onBlur: (e: Event) => this.handleInputChange(e, 'InputPhone', testPhone, message.phone) });
-    const ChangeButton = new Button({ ...data.changeBtn });
-    const ChangePasswordButton = new Button({ ...data.changePasswordBtn });
-    const LogOutButton = new Button({ ...data.logoutBtn });
+    const ChangeButton = new Button({ ...data.changeBtn, onClick: onChangeDataBind });
+    const ChangePasswordButton = new Button({ ...data.changePasswordBtn, onClick: onChangePasswordBind });
+    const LogOutButton = new Button({ ...data.logoutBtn, onClick: () => logout() });
+    const SubmitButton = new Button({ ...data.submit, onClick: onSubmitBind });
+    const CancelButton = new Button({ ...data.cancel, onClick: onCancelBind });
 
     this.children = {
       ...this.children,
@@ -94,15 +112,80 @@ class Profile extends Block {
       InputPhone,
       ChangeButton,
       ChangePasswordButton,
-      LogOutButton
+      LogOutButton,
+      SubmitButton,
+      CancelButton
     };
 
     this.name = 'Profile';
+    this.store = window.store.getState();
+  }
+
+  beforeMount(): void {
+    this.getInfo();
+  }
+
+  getInfo() {
+    userinfo()
+      .then((response) => { 
+        const fetchData: any = response;
+        if (fetchData) 
+          Object.keys(fetchData).forEach((key) => {
+            if (key in data) {
+              if (key === 'avatar') 
+                this.children.Avatar.setProps({ path: fetchData[key] });
+              if (key === 'email') 
+                this.children.InputEmail.setProps({ value: fetchData[key] });
+              else if (key === 'login') 
+                this.children.InputLogin.setProps({ value: fetchData[key] });
+              else if (key === 'first_name') 
+                this.children.InputFirstName.setProps({ value: fetchData[key] });
+              else if (key === 'second_name') 
+                this.children.InputLastName.setProps({ value: fetchData[key] });
+              else if (key === 'display_name')
+                this.children.InputDisplayName.setProps({ value: fetchData[key] });
+              else if (key === 'phone') 
+                this.children.InputPhone.setProps({ value: fetchData[key] });
+            }
+          });
+
+        window.store.set({ userName: fetchData['display_name'] || fetchData['first_name'] });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  onChangeData() {
+    window.store.set({ profileDisabled: false });
+    
+    this.inputControls();
+  }
+
+  onCancel() {
+    window.store.set({
+      errorMessage: null,
+      profileDisabled: true
+    });
+
+    this.inputControls();
+  }
+
+  inputControls() {
+    const state = window.store.getState();
+    
+    this.children.InputEmail.setProps({ disabled: state.profileDisabled.toString() });
+    this.children.InputLogin.setProps({ disabled: state.profileDisabled.toString() });
+    this.children.InputFirstName.setProps({ disabled: state.profileDisabled.toString() });
+    this.children.InputLastName.setProps({ disabled: state.profileDisabled.toString() });
+    this.children.InputDisplayName.setProps({ disabled: state.profileDisabled.toString() });
+    this.children.InputPhone.setProps({ disabled: state.profileDisabled.toString() });
   }
 
   onBack() {
-    console.log('going back');
+    window.router.go('/messenger');
   }
+
   onChangeAvatar() {
     console.log('change avatar');
   }
@@ -126,15 +209,24 @@ class Profile extends Block {
 
     if (!isValid) return;
 
-    const target = e.target as HTMLFormElement;
-    const form = target!.form;
+    const target = document.querySelector('#profile');
+    const output: UpdateUserData = {} as UpdateUserData;
+    const form = target as HTMLFormElement;
     const formData = new FormData(form);
-    const output: {[key: string]: FormDataEntryValue} = {};
-
+  
     formData.forEach((value, key) => {
-      output[key] = value;
+      output[key] = value.toString();
     });
-    console.log(output);
+
+    update(output)
+      .then(() => {
+        window.store.set({
+          errorMessage: null,
+          profileDisabled: true
+        });
+    
+        this.getInfo();
+      });
   }
 
   validateForm() {
@@ -162,6 +254,10 @@ class Profile extends Block {
     return isValid;
   }
 
+  onChangePassword() {
+    window.router.go('/password');
+  }
+
   render() {
     return `
       <div class="profile">
@@ -169,8 +265,11 @@ class Profile extends Block {
 
         <div class="profile__content">
           {{{ Avatar }}}
-          <div class="profile__content_name">Evan</div>
-          <form class="profile__content_form">
+          <div class="profile__content_name">{{{ userName }}}</div>
+          <form class="profile__content_form" id="profile">
+            {{#if errorMessage}}
+            <p class="text-center text-error">{{{ errorMessage }}}</p>
+            {{/if}}
             <div class="profile__content_form_row">
               <span class="profile__content_form_row_title">E-mail</span>
               {{{ InputEmail }}}
@@ -197,6 +296,7 @@ class Profile extends Block {
             </div>
           </form>
           <div class="profile__content_controls">
+          {{#if profileDisabled}}
             <div class="profile__content_controls_row">
               {{{ ChangeButton }}}
             </div>
@@ -206,6 +306,14 @@ class Profile extends Block {
             <div class="profile__content_controls_row">
               {{{ LogOutButton }}}
             </div>
+          {{else}}
+            <div class="profile__content_controls_row">
+              {{{ SubmitButton }}}
+            </div>
+            <div class="profile__content_controls_row">
+              {{{ CancelButton }}}
+            </div>
+          {{/if}}
           </div>
         </div>
       </div>
@@ -213,4 +321,6 @@ class Profile extends Block {
   }
 };
 
-export default Profile;
+const mapStateToPropsShort = ({ isLoading, errorMessage, profileDisabled, userName }: { [key: string]: any }) => ({ isLoading, errorMessage, profileDisabled, userName });
+
+export default connect(mapStateToPropsShort)(Profile);

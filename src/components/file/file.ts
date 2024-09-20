@@ -7,7 +7,8 @@ class FileInput extends Block {
     super({
       ...props,
       events: {
-        click: props.onClick
+        click: props.onClick,
+        change: props.onChange
       }
     });
   };

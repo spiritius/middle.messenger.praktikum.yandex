@@ -16,10 +16,14 @@ class Button extends Block {
     return `
       <button 
         type="{{ type }}" 
-        class="btn btn-{{ style }}"
+        class="btn {{#if style}}btn-{{ style }}{{/if}} {{ class }}"
         {{#if attributes}}{{{ attributes }}}{{/if}}
         {{#if id}}id="{{ id }}"{{/if}}
-        >{{ title }}</button>
+        {{#if (eq disabled 'true') }}disabled{{/if}}
+        >
+        {{#if icon}}<span class="icon icon-{{ icon }}"></span>{{/if}}
+        {{ title }}
+        </button>
     `;
   };
 };

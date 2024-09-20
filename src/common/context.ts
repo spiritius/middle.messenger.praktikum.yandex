@@ -1,5 +1,4 @@
 import { 
-  NAV,
   CONTACTS, 
   CONTACT_DROPDOWN_OPTIONS,
   PROFILE_DROPDWON_OPTIONS,
@@ -12,9 +11,6 @@ interface Context {
 const context: Context = {
   Registration: {},
   Login: {},
-  NavList: {
-    nav: NAV
-  },
   Error404: {
     title: '404 Page not found',
     descr: 'You got the wrong way',

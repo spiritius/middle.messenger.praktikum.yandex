@@ -2,8 +2,10 @@ import './assets/style.scss';
 import Handlebars from 'handlebars';
 import * as Components from './components';
 import * as Pages from './pages';
-import context from './common/context.ts';
-import Block from '@/core/block.ts';
+// import context from './common/context';
+import Block from '@/core/block';
+import Router from '@/core/router';
+import { Store } from '@/core/store';
 
 // helper for if condition 
 Handlebars.registerHelper('eq', function (value1, value2) {
@@ -16,58 +18,38 @@ Object.entries(Components).forEach(([key, value]) => {
   Handlebars.registerPartial(key, value);
 });
 
-const app = document.querySelector('#app')!;
 const pages: { [key: string]: string | typeof Block } = {};
 
 Object.entries(Pages).forEach((item) => {
-  pages[item[0]] = item[1];
+  (pages as any)[item[0]] = item[1];
 });
 
-const nav = (page: string) => {
-  const source = pages[page];
-  const pageContext = context[page];
-
-  if(source instanceof Object) {
-    const page = new source(pageContext);
-    const content = page.getContent();
-    
-    if (content) {
-      app!.innerHTML = '';
-      app!.append(content);
-    } else
-      console.error('page.getContent() is Null');
-
-    // page.dispatchComponentDidMount();
-    return;
+declare global {
+  interface Window {
+    router: Router;
+    store: Store;
   }
+}
 
-  app!.innerHTML = Handlebars.compile(source)(pageContext);
-};
+const router = new Router('#app');
+window.router = router;
 
-document.addEventListener('DOMContentLoaded', () => {
-  nav('NavList'); // initial navigation page
-
-  app!.addEventListener('click', (e) => {
-    const target = e.target as HTMLElement;
-
-    if (target.matches('#nav li')) {
-      const page = target.dataset.page;
-      if (page) 
-        nav(page);
-    }
-  });
-
-  app!.addEventListener('input', (e) => {
-    const target = e.target as HTMLInputElement;
-
-    if (target.matches('#message')) {
-      const lines = target.value.split('\n');
-      const body = document.querySelector('#chat-content') as HTMLElement;
-      
-      if (body && lines.length > 2) 
-        body.style.gridTemplateRows = '73px 1fr 130px';
-      else 
-        body.style.gridTemplateRows = '73px 1fr 73px';
-    }
-  });
+window.store = new Store({
+  isLoading: false,
+  user: null,
+  profileDisabled: true,
+  errorMessage: null,
+  successMessage: null,
+  userName: null,
+  userId: null,
+  chatId: null,
 });
+
+router
+  .use('/', Pages.Login)
+  .use('/sign-up', Pages.Registration)
+  .use('/messenger', Pages.ChatEmpty)
+  .use('/settings', Pages.Profile)
+  .use('/password', Pages.PasswordChange)
+  .use('*', Pages.Error404)
+  .start();

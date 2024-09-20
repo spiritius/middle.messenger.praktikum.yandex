@@ -3,10 +3,11 @@ import { ModalAvatar } from '@/components/modal';
 
 class ProfileAvatar extends Block {
   init() {
-    const Modal = new ModalAvatar();
+    const Modal = new ModalAvatar({});
 
     this.children = {
       ...this.children,
+      //@ts-expect-error wft
       Modal
     };
   }
@@ -15,6 +16,9 @@ class ProfileAvatar extends Block {
     return `
       <div>
         <div class="profile__content_avatar">
+          {{#if path}}
+          <img src="https://ya-praktikum.tech/api/v2/resources/{{ path }}" alt="user picture" />
+          {{/if}}
           <button
             type="button"
             class="profile__content_avatar_control"

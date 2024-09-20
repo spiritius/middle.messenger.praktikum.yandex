@@ -5,6 +5,10 @@ import path from 'path';
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 export default defineConfig({
+  base: '/',
+  build: {
+    outDir: 'dist',
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

@@ -10,11 +10,11 @@ class Block {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
-    FLOW_RENDER: 'flow:render'
+    FLOW_RENDER: 'flow:render',
+    BEFORE_MOUNT: 'before:mount'
   };
 
   #element: HTMLElement | null = null;
-  // #meta: { tagName?: string; props?: any } | null = null; 
   #id: string = nanoid(6);
 
   // типы публичных свойств
@@ -27,11 +27,6 @@ class Block {
     // создается экземпляр ивент-баса
     const eventBus = new EventBus(); 
     const { props, children } = this.#getChildrenAndProps(propsWithChildren);
-    // #meta хранит метаданные компонента: тег и его свойства
-    // this.#meta = {
-    //   tagName,
-    //   props
-    // };
     // все свойства компонента проходят через метод #makePropsProxy
     this.props = this.#makePropsProxy(props); 
     this.children = children;
@@ -74,6 +69,7 @@ class Block {
     eventBus.on(Block.EVENTS.FLOW_CDM, this.#componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this.#componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this.#render.bind(this));
+    eventBus.on(Block.EVENTS.BEFORE_MOUNT, this.beforeMount.bind(this));
   }
 
   #init() {
@@ -85,6 +81,7 @@ class Block {
   init(): void {};
 
   #componentDidMount() {
+    this.eventBus().emit(Block.EVENTS.BEFORE_MOUNT);
     this.componentDidMount();
 
     Object.values(this.children).forEach(child => {
@@ -93,16 +90,15 @@ class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidMount(oldProps: Props = {}): void {
-    console.log('CDM, oldProps:', oldProps);
-  }
+  componentDidMount(_oldProps: Props = {}): void {}
+
+  beforeMount(): void {}
 
   dispatchComponentDidMount(): void {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   #componentDidUpdate(oldProps?: Props, newProps?: Props): void {
-    console.log('-- component did update');
     // вызывается при обновлении свойств компонента
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response)
@@ -112,9 +108,7 @@ class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps?: Props, newProps?: Props): boolean {
-    console.log(oldProps, newProps);
-    
+  componentDidUpdate(_oldProps?: Props, _newProps?: Props): boolean {
     return true;
   }
 
