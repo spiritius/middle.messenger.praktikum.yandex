@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import Block from './block';
 
-type Props = { [key: string]: any }; // обобщенный тип для props
+type Props = { [key: string]: any };
 
 describe('Block', () => {
   let TestBlock: typeof Block;
@@ -15,7 +15,9 @@ describe('Block', () => {
         });
       }
       render(): string {
-        return '<div id="content-body">{{content}}</div>';
+        return `
+          <div id="content-body">{{content}}</div>
+          `;
       }
     }
 
@@ -29,9 +31,13 @@ describe('Block', () => {
   it('should init and render with props from constructor', () => {
     const content = 'sprint 4';
     const testComponent = new TestBlock({ content });
+    
+    const getContent = testComponent.element?.querySelector('#content-body')?.innerHTML;
 
-    const getContent = testComponent.element?.querySelector('#content-body')?.textContent;
-    expect(getContent).to.equal(content);
+    console.log(testComponent.element?.innerHTML); // sprint 4
+    console.log(getContent); // undefined
+
+    expect(getContent).to.be.eq(content);
   });
 
 });
