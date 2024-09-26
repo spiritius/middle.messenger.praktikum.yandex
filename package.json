@@ -13,11 +13,6 @@
     "preview": "vite preview",
     "test": "mocha"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test && npm run lint && npm run lint:css"
-    }
-  },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
     "@types/chai": "^4.3.19",
