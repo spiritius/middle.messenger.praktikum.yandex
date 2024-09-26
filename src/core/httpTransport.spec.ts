@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import HTTPTransport from '@/core/httpTransport';
 import queryStringify from '@/utils/queryStringify';
-import { METHODS } from 'http';
 
 const host = 'https://ya-praktikum.tech'; // убран префикс /api/v2
 
@@ -47,6 +46,7 @@ describe('HTTPTransport', () => {
 
     try {
       await http.request(`${host}/test`, { method: undefined });
+      expect(requestStub.calledOnce).to.be.true;
     } catch (error) {
       //@ts-expect-error wft
       expect(error.message).to.equal('No method');
