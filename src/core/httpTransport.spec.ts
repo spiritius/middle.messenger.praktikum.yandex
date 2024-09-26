@@ -7,7 +7,7 @@ import { METHODS } from 'http';
 
 const host = 'https://ya-praktikum.tech'; // убран префикс /api/v2
 
-describe.only('HTTPTransport', () => {
+describe('HTTPTransport', () => {
   afterEach(() => {
     sinon.restore();
   });

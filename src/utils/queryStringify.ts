@@ -10,8 +10,6 @@ function queryStringify(data: StringIndexed, parentKey: string | null = null): s
     const value = data[key];
     const fullkey = parentKey ? `${parentKey}[${key}]` : key;
 
-    console.log(value, fullkey);
-    
     if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean')
       result += `&${fullkey}=${encodeURIComponent(value)}`;
     else if (Array.isArray(value))
