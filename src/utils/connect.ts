@@ -4,7 +4,7 @@ import isEqual from './isEqual';
 export function connect(mapStateToProps: (arg0: any) => any) {
   return function(Component: any) {
     return class extends Component{
-      private onChangeStoreCallback: () => void;
+      onChangeStoreCallback: () => void;
       constructor(props: any) {
         const store = window.store;
         // сохраняем начальное состояние

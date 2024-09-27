@@ -19,12 +19,16 @@ interface RequestOptions {
 class HTTPTransport {
   private apiDomain: string = 'https://ya-praktikum.tech';
   apiUrl: string;
+  static GET: string | undefined;
 
   constructor(endpoint: string = '') {
     this.apiUrl = `${this.apiDomain}${endpoint}`;
   }
 
   get = (url: string, options: RequestOptions = {}): Promise<XMLHttpRequest> => {
+    if (options.data) 
+      url += '?' + queryStringify(options.data);
+    
     return this.request(`${this.apiUrl}${url}`, { ...options, method: METHODS.GET }, options.timeout);
   };
 
@@ -54,9 +58,6 @@ class HTTPTransport {
 
       const xhr = new XMLHttpRequest();
 
-      if (method === METHODS.GET && data) 
-        url += queryStringify(data);
-      
       xhr.open(method, url);
       xhr.withCredentials = true;
 

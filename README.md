@@ -12,14 +12,11 @@
 
 ## Текущая версия
 
-Функционал реализован в рамках Спринта 3.
+Функционал реализован в рамках Спринта 4.
 
-- реализован router на основе практических занятий
-- возможен переход по страницам и истории браузера
-- добавлены api для чатов, авторизации и пользователей на основе практических занятий
-- реализованы регистрация и логин пользавателя мессенджера
-- реализована работа с чатами: добавление чата, добавление пользователя в чат, удаление пользователя из чата, удаление чата
-- реализована отправка и прием сообщений при помощи websocket.
+- добавлены тесты для Block, HTTPTransport, Router и компонента Button
+- добален Husky@7 и настроен pre-commit отдельным файлом
+- пакеты проекта в достаточной версии для node 16
 
 ## Установка
 
@@ -53,14 +50,11 @@ Project language: English
 
 ## Current Version
 
-The functionality was implemented as part of Sprint 3.
+The functionality was implemented as part of Sprint 4.
 
-- Implemented router based on practical lessons
-- Navigation between pages and browser history is enabled
-- Added APIs for chats, authentication, and users based on practical lessons
-- Implemented user registration and login for the messenger
-- Implemented chat functionality: adding a chat, adding a user to a chat, removing a user from a chat, and deleting a chat
-- Implemented sending and receiving messages via WebSocket.
+- Added tests for Block, HTTPTransport, Router, and the Button component
+- Added Husky@7 and configured pre-commit with a separate file
+- Project packages are compatible with Node 16
 
 ## Installation
 
